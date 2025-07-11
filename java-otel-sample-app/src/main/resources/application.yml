@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+otel:
+  exporter:
+    otlp:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4317}
+      logs:
+        endpoint: ${OTEL_EXPORTER_OTLP_LOGS_ENDPOINT:http://localhost:4317}
+  service:
+    name: ${OTEL_SERVICE_NAME:java-otel-sample-app}
+  resource:
+    attributes:
+      service.name: ${OTEL_SERVICE_NAME:java-otel-sample-app}
+      service.version: "1.0.0"
+      deployment.environment: ${ENVIRONMENT:development}
+  logs:
+    exporter: otlp
+  instrumentation:
+    logback:
+      appender:
+        enabled: true
+
+logging:
+  level:
+    com.example.app: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
