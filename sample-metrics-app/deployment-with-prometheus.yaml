@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-metrics-app
+  labels:
+    app: sample-metrics-app
+    workload: fargate
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-metrics-app
+  template:
+    metadata:
+      labels:
+        app: sample-metrics-app
+        workload: fargate
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/"
+    spec:
+      containers:
+      - name: sample-metrics-app
+        image: ${ECR_REPO}:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        env:
+        - name: AWS_REGION
+          value: ${AWS_REGION}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-metrics-app
+  labels:
+    app: sample-metrics-app
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+    name: metrics
+  selector:
+    app: sample-metrics-app

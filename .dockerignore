@@ -1,0 +1,104 @@
+# Version control
+.git
+.gitignore
+
+# Build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# Virtual environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# AWS
+.aws-sam/
+samconfig.toml
+.chalice/
+.aws-credentials
+
+# Kubernetes
+kubeconfig
+*.kubeconfig
+kubectl
+.kube/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# CDK
+cdk.out/
+.cdk.staging
+cdk.context.json
+
+# Binary files
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.jar
+*.war
+*.ear
+
+# Archive files
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Generated files
+target/
+*.class
+
+# Binary executables
+go-otel-sample-app/main
+
+# Documentation and non-essential files
+README.md
+LICENSE
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+THIRD_PARTY_LICENSES.md
+architecture-diagram/
+grafana_dashboard/
