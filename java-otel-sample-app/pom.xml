@@ -19,7 +19,7 @@
         <otel.version>1.44.1</otel.version>
         <micrometer.version>1.14.2</micrometer.version>
         <!-- Explicitly set Tomcat version to latest secure version -->
-        <tomcat.version>11.0.9</tomcat.version>
+        <tomcat.version>11.0.10</tomcat.version>
     </properties>
 
     <dependencyManagement>
