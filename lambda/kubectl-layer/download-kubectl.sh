@@ -4,15 +4,9 @@
 set -e
 
 KUBECTL_VERSION="v1.28.0"
-ARCH=$(uname -m)
-OS=$(uname | tr '[:upper:]' '[:lower:]')
-
-# Map architecture
-if [ "$ARCH" == "x86_64" ]; then
-    ARCH="amd64"
-elif [ "$ARCH" == "aarch64" ]; then
-    ARCH="arm64"
-fi
+# Force Linux x86_64 for AWS Lambda compatibility
+OS="linux"
+ARCH="amd64"
 
 # Create bin directory if it doesn't exist
 mkdir -p bin

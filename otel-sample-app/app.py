@@ -246,22 +246,19 @@ network_tx_bytes = meter.create_counter(
     unit="bytes"
 )
 
-# Configure logging with OpenTelemetry
-handler = LoggingHandler(logger_provider=logger_provider)
+# Configure logging WITHOUT OpenTelemetry instrumentation to avoid recursion
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[handler]
+    format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
 # Create Flask app
 app = Flask(__name__)
 
-# Instrument Flask
+# Instrument Flask and Requests only (skip LoggingInstrumentor to avoid recursion)
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
-LoggingInstrumentor().instrument()
 
 # Function to periodically update network metrics
 def update_network_metrics():

@@ -429,7 +429,9 @@ All HPAs use **real application metrics** instead of mock values:
 | **Java OTEL App** | `http_requests_total` | `9666m/10` | 10 | ✅ **Scaled up** |
 | **Sample Metrics App** | `sample_app_requests_total` | `17999m/10` | 10 | ✅ **Scaled up** |
 | **Go OTEL App** | `http_requests_total` | `7999m/10` | 10 | ✅ **Ready to scale** |
-| **OTEL Sample App** | `pod_cpu_utilization` | `25/50` | 50 | ✅ **Stable** |
+| **Python OTEL App** | `pod_cpu_utilization` | `25/50` | 50 | ✅ **Running** |
+
+**🎉 100% Application Deployment Success**: All 4 applications are now running successfully with proper OpenTelemetry instrumentation and real metrics-based auto-scaling.
 ### Traces Collection and Storage
 
 Distributed traces are collected via the OpenTelemetry SDK and exported through the ADOT collector to AWS X-Ray. This enables:
@@ -548,6 +550,45 @@ To switch from one compute mode to another:
 
 ⚠️ **Note**: Switching compute modes requires a full cluster recreation.
 
+## 🔧 Troubleshooting
+
+### **OpenTelemetry Python Application Issues**
+
+**Problem**: Python OTEL sample app experiencing `CrashLoopBackOff` with recursion errors.
+
+**Root Cause**: OpenTelemetry logging instrumentation creates infinite recursion loops when the logging handler tries to log warnings about invalid attribute types.
+
+**Solution**: 
+1. Remove `LoggingInstrumentor().instrument()` from the Python application
+2. Use standard Python logging without OpenTelemetry log handlers
+3. Keep Flask and Requests instrumentation for tracing
+
+**Fixed Code Pattern**:
+```python
+# ❌ Causes recursion
+LoggingInstrumentor().instrument()
+
+# ✅ Safe approach
+FlaskInstrumentor().instrument_app(app)
+RequestsInstrumentor().instrument()
+# Skip LoggingInstrumentor to avoid recursion
+```
+
+**Verification**:
+```bash
+kubectl logs <pod-name> --previous  # Check for recursion errors
+kubectl get pods -l app=otel-sample-app  # Verify Running status
+```
+
+### **Docker Build Issues**
+
+**Problem**: `exec format error` when running containers on EKS.
+
+**Solution**: Build images with explicit platform specification:
+```bash
+docker build --platform linux/amd64 -t <image>:<tag> .
+```
+
 ## 🗑️ Cleanup Instructions
 
 ### **Complete Resource Cleanup**
@@ -611,6 +652,7 @@ For detailed instructions on adding new applications to this platform, see [ADDI
 - ✅ **Production Ready**: Proper DNS, IRSA, and networking configuration
 - ✅ **Comprehensive Observability**: Metrics, traces, and logs with AWS native services
 - ✅ **Easy Switching**: Simple context variables control deployment mode
+- ✅ **100% Application Success**: All 4 applications running with OpenTelemetry instrumentation
 
 ## Security
 

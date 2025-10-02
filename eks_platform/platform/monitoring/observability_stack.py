@@ -102,6 +102,29 @@ class ObservabilityStack(Stack):
                 assumed_by=iam.ServicePrincipal("grafana.amazonaws.com")
             )
             
+            # Add AMP permissions to main Grafana service role
+            grafana_service_role.add_to_policy(
+                iam.PolicyStatement(
+                    actions=[
+                        "aps:ListWorkspaces",
+                        "aps:DescribeWorkspace",
+                        "aps:QueryMetrics",
+                        "aps:GetLabels",
+                        "aps:GetSeries",
+                        "aps:GetMetricMetadata"
+                    ],
+                    resources=["*"]
+                )
+            )
+            
+            # Add X-Ray permissions to main Grafana service role
+            grafana_service_role.add_to_policy(
+                iam.PolicyStatement(
+                    actions=["xray:*"],
+                    resources=["*"]
+                )
+            )
+            
             # Create Grafana assume role for Prometheus
             self.grafana_prometheus_role = iam.Role(
                 self,
@@ -186,6 +209,8 @@ class ObservabilityStack(Stack):
                 permission_type="SERVICE_MANAGED",
                 role_arn=grafana_service_role.role_arn,
                 data_sources=["PROMETHEUS", "CLOUDWATCH", "XRAY"],
+                plugin_admin_enabled=True,
+                grafana_version="10.4",
                 name="eks-automode-platform"
             )
             
