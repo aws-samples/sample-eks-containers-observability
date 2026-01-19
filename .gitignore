@@ -100,3 +100,4 @@ go-otel-sample-app/main
 
 # Generated CDK files
 cdk.context.json
+outputs.json

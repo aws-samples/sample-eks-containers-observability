@@ -168,6 +168,44 @@ cd ../..
 cdk deploy --context compute_mode=fargate
 ```
 
+#### **Option 3: Deploy with AWS DevOps Agent Integration** 🤖
+
+The platform includes optional AWS DevOps Agent integration for AI-powered cluster investigation and troubleshooting.
+
+**Prerequisites:**
+1. Create an Agent Space in AWS DevOps Agent console
+2. Note the service-linked role ARN (format: `arn:aws:iam::ACCOUNT:role/service-role/AGENT_SPACE_NAME-DevOpsAgentRole`)
+
+**Deploy with DevOps Agent:**
+```bash
+# Deploy with your Agent Space role ARN
+cdk deploy --all \
+  -c deploy_devops_agent=true \
+  -c devops_agent_role_arn="arn:aws:iam::ACCOUNT:role/service-role/YOUR_AGENT_SPACE-DevOpsAgentRole"
+
+# Example:
+cdk deploy --all \
+  -c deploy_devops_agent=true \
+  -c devops_agent_role_arn="arn:aws:iam::YOUR_ACCOUNT_ID:role/service-role/YOUR_AGENT_SPACE-DevOpsAgentRole"
+```
+
+**What gets deployed:**
+- Managed IAM policies for CloudWatch Logs, EKS, and CloudWatch Metrics access
+- EKS access entry with cluster admin policy
+- Automatic configuration for cluster investigation
+
+**After deployment:**
+The DevOps Agent will have full access to:
+- Kubernetes API (pods, deployments, services, logs)
+- CloudWatch Logs (application and system logs)
+- CloudWatch Metrics (resource utilization)
+- Prometheus metrics (custom application metrics)
+- X-Ray traces (distributed tracing)
+
+**Documentation:**
+- 📖 [Complete DevOps Agent Guide](./DEVOPS_AGENT_GUIDE.md) - Setup, configuration, and usage
+- 📖 [Demo Scenarios](./devops-agent-demo/README.md) - Example investigations
+
 ### Build and Push Sample App Images
 
 1. Build and push the sample app images:

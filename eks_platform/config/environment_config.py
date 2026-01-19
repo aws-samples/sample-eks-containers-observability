@@ -40,6 +40,16 @@ class MonitoringConfig:
 
 
 @dataclass
+class DevOpsAgentConfig:
+    """DevOps Agent configuration for the environment"""
+    enabled: bool = False
+    agent_space_name: Optional[str] = None
+    role_arn: Optional[str] = None  # ARN of existing DevOps Agent service-linked role
+    create_eks_access: bool = True
+    grant_cluster_admin: bool = True
+
+
+@dataclass
 class EnvironmentConfig:
     """Complete environment configuration"""
     environment_name: str
@@ -48,6 +58,7 @@ class EnvironmentConfig:
     network: NetworkConfig
     eks: EksConfig
     monitoring: MonitoringConfig
+    devops_agent: DevOpsAgentConfig = field(default_factory=DevOpsAgentConfig)
 
     @classmethod
     def development(cls, account: str, region: str) -> 'EnvironmentConfig':
@@ -67,7 +78,7 @@ class EnvironmentConfig:
                     mode="auto-mode",
                     auto_mode_enabled=True
                 ),
-                admin_user_arn="arn:aws:iam::123456789:user/user-cli"
+                admin_user_arn=None  # Optional: Set your IAM user/role ARN for cluster access
             ),
             monitoring=MonitoringConfig(
                 prometheus_enabled=True,

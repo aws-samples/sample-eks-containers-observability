@@ -1,2 +1,9 @@
 from .constants import *
-from .environment_config import EnvironmentConfig, NetworkConfig, EksConfig, MonitoringConfig
+from .environment_config import (
+    EnvironmentConfig, 
+    NetworkConfig, 
+    EksConfig, 
+    MonitoringConfig,
+    DevOpsAgentConfig,
+    ComputeConfig
+)
