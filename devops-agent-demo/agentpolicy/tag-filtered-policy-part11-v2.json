@@ -1,0 +1,55 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AdditionalServices",
+      "Effect": "Allow",
+      "Action": [
+        "kms:Describe*",
+        "kms:Get*",
+        "kms:List*",
+        "secretsmanager:Describe*",
+        "secretsmanager:Get*",
+        "secretsmanager:List*",
+        "acm:Describe*",
+        "acm:Get*",
+        "acm-pca:Describe*",
+        "acm-pca:Get*",
+        "acm-pca:List*",
+        "pca-connector-ad:Get*",
+        "pca-connector-ad:List*",
+        "pca-connector-scep:Get*",
+        "pca-connector-scep:List*",
+        "payment-cryptography:Get*",
+        "payment-cryptography:List*",
+        "ram:Get*",
+        "ram:List*",
+        "transfer:Describe*",
+        "transfer:List*",
+        "refactor-spaces:Get*",
+        "refactor-spaces:List*",
+        "proton:Get*",
+        "proton:List*",
+        "servicecatalog:Describe*",
+        "servicecatalog:Get*",
+        "servicecatalog:List*",
+        "opsworks-cm:Describe*",
+        "opsworks-cm:List*",
+        "elasticbeanstalk:Describe*",
+        "elasticbeanstalk:List*",
+        "elasticmapreduce:Describe*",
+        "elasticmapreduce:List*",
+        "emr-containers:Describe*",
+        "emr-containers:List*",
+        "emr-serverless:Get*",
+        "emr-serverless:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "NetworkingContent",
+      "Effect": "Allow",
+      "Action": [
+        "route53:Get*",
+        "route53:List*",
+        "route53resolver:*",
+        "route53profiles:*",
+        "route53-recovery-control-config:*",
+        "route53-recovery-readiness:*",
+        "cloudfront:*",
+        "globalaccelerator:*",
+        "networkmanager:*",
+        "network-firewall:*",
+        "vpc-lattice:*",
+        "wafv2:Get*",
+        "wafv2:List*",
+        "shield:*",
+        "fms:Get*",
+        "fms:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "ManagementGovernance",
+      "Effect": "Allow",
+      "Action": [
+        "ssm:*",
+        "ssm-contacts:*",
+        "ssm-incidents:*",
+        "ssm-sap:*",
+        "organizations:Describe*",
+        "organizations:List*",
+        "config:*",
+        "backup:*",
+        "backup-gateway:*",
+        "events:Describe*",
+        "events:List*",
+        "states:*",
+        "batch:*",
+        "resource-groups:*",
+        "resource-explorer-2:*",
+        "ce:*",
+        "budgets:*",
+        "pi:*",
+        "health:Describe*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

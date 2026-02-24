@@ -106,7 +106,7 @@ class EnvironmentConfig:
                     fargate_profiles=["default", "monitoring", "opentelemetry", "kube-system"],
                     auto_mode_enabled=False
                 ),
-                admin_user_arn="arn:aws:iam::123456789:user/user-cli"
+                admin_user_arn=None  # Optional: Set your IAM user/role ARN for cluster access
             ),
             monitoring=MonitoringConfig(
                 prometheus_enabled=True,

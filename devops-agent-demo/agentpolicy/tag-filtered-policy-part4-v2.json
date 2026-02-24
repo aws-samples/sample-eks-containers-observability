@@ -1,0 +1,58 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DataAnalytics",
+      "Effect": "Allow",
+      "Action": [
+        "glue:Get*",
+        "glue:List*",
+        "glue:querySchemaVersionMetadata",
+        "athena:Get*",
+        "athena:List*",
+        "lakeformation:Describe*",
+        "lakeformation:Get*",
+        "lakeformation:List*",
+        "databrew:Describe*",
+        "databrew:List*",
+        "datapipeline:Describe*",
+        "datapipeline:Get*",
+        "datapipeline:List*",
+        "datasync:Describe*",
+        "datasync:List*",
+        "dms:Describe*",
+        "dms:List*",
+        "timestream:Describe*",
+        "timestream:List*",
+        "osis:Get*",
+        "osis:List*",
+        "es:Describe*",
+        "es:List*",
+        "aoss:BatchGetCollection",
+        "aoss:BatchGetLifecyclePolicy",
+        "aoss:BatchGetVpcEndpoint",
+        "aoss:Get*",
+        "aoss:List*",
+        "kinesis:Describe*",
+        "kinesis:Get*",
+        "kinesis:List*",
+        "kinesisanalytics:Describe*",
+        "kinesisanalytics:List*",
+        "kinesisvideo:Describe*",
+        "firehose:Describe*",
+        "firehose:List*",
+        "kafka:Describe*",
+        "kafka:Get*",
+        "kafka:List*",
+        "kafkaconnect:Describe*",
+        "kafkaconnect:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

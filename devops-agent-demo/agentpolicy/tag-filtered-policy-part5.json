@@ -1,0 +1,79 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DatabasesCompute",
+      "Effect": "Allow",
+      "Action": [
+        "elasticache:*",
+        "elasticmapreduce:*",
+        "redshift:Describe*",
+        "redshift-serverless:*",
+        "elasticbeanstalk:*",
+        "elasticfilesystem:Describe*",
+        "fsx:Describe*",
+        "lakeformation:*",
+        "databrew:*",
+        "datapipeline:*",
+        "datasync:*",
+        "dms:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "AIMLServices",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:Describe*",
+        "sagemaker:List*",
+        "comprehend:*",
+        "rekognition:*",
+        "forecast:*",
+        "lookoutmetrics:*",
+        "lookoutvision:*",
+        "personalize:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "ApplicationServices",
+      "Effect": "Allow",
+      "Action": [
+        "amplify:*",
+        "appsync:*",
+        "appconfig:*",
+        "apprunner:*",
+        "appflow:*",
+        "appstream:*",
+        "cognito-identity:*",
+        "cognito-idp:*",
+        "ses:*",
+        "connect:*",
+        "chatbot:*",
+        "qbusiness:*",
+        "iot:*",
+        "iotsitewise:*",
+        "iotwireless:*",
+        "iotanalytics:*",
+        "iotevents:*",
+        "iotfleethub:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

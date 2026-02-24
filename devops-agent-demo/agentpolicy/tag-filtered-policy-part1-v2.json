@@ -1,0 +1,59 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ApiGatewayAccess",
+      "Effect": "Allow",
+      "Action": "apigateway:GET",
+      "Resource": [
+        "arn:aws:apigateway:*::/apis/*",
+        "arn:aws:apigateway:*::/restapis/*",
+        "arn:aws:apigateway:*::/domainnames/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "CoreComputeStorage",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:Describe*",
+        "ec2:Get*",
+        "ec2:Search*",
+        "eks:Describe*",
+        "eks:List*",
+        "ecr:Describe*",
+        "ecr:List*",
+        "ecr:Get*",
+        "ecs:Describe*",
+        "ecs:List*",
+        "lambda:Get*",
+        "lambda:List*",
+        "autoscaling:Describe*",
+        "elasticloadbalancing:Describe*",
+        "elasticloadbalancing:Get*",
+        "batch:Describe*",
+        "batch:List*",
+        "lightsail:Get*",
+        "workspaces:Describe*",
+        "workspaces-web:Get*",
+        "workspaces-web:List*",
+        "nimble:Get*",
+        "nimble:List*",
+        "deadline:Get*",
+        "deadline:List*",
+        "m2:Get*",
+        "m2:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

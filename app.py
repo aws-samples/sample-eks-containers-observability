@@ -81,6 +81,10 @@ print()
 
 # Add custom tags to all resources
 Tags.of(app).add("DemosFor", "OTEL-DevOpsAgent-AIforOperations")
+Tags.of(app).add("auto-delete", "never")
+
+# Stack name prefix for this deployment
+STACK_PREFIX = "OTEL-DevOpsAgent-Demo-v1"
 
 # Create environment configuration
 account = os.getenv('CDK_DEFAULT_ACCOUNT')
@@ -112,28 +116,28 @@ if deploy_devops_agent:
 # Create the infrastructure layer
 vpc_stack = VpcStack(
     app, 
-    "NetworkStack", 
+    f"{STACK_PREFIX}-Network", 
     network_config=config.network,
     env=cdk_env
 )
 
 kubectl_layer_stack = KubectlLayerStack(
     app, 
-    "KubectlLayerStack", 
+    f"{STACK_PREFIX}-KubectlLayer", 
     env=cdk_env
 )
 
 # Create the platform layer
 observability_stack = ObservabilityStack(
     app, 
-    "ObservabilityStack",
+    f"{STACK_PREFIX}-Observability",
     monitoring_config=config.monitoring,
     env=cdk_env
 )
 # Create ECR repositories for applications
 ecr_stack = EcrRepositoriesStack(
     app, 
-    "EcrStack",
+    f"{STACK_PREFIX}-Ecr",
     repository_names=["sample-metrics-app", "otel-sample-app", "go-otel-sample-app", "java-otel-sample-app"],
     env=cdk_env
 )
@@ -141,7 +145,7 @@ ecr_stack = EcrRepositoriesStack(
 # Create the EKS cluster with a better name
 eks_cluster_stack = EksClusterStack(
     app, 
-    "EKS-Platform-Cluster",
+    f"{STACK_PREFIX}-EKS-Cluster",
     vpc=vpc_stack.vpc,
     kubectl_layer=kubectl_layer_stack.kubectl_layer,
     eks_config=config.eks,
@@ -160,8 +164,7 @@ prometheus = PrometheusConstruct(
     monitoring_namespace=eks_cluster_stack.monitoring_namespace,
     compute_config=config.eks.compute
 )
-prometheus.node.add_dependency(eks_cluster_stack)
-prometheus.node.add_dependency(eks_cluster_stack.monitoring_namespace)
+# Dependencies are handled internally - constructs are children of eks_cluster_stack
 
 # Add Prometheus Adapter for custom metrics (created after Prometheus with delay)
 prometheus_adapter = PrometheusAdapterConstruct(
@@ -173,9 +176,7 @@ prometheus_adapter = PrometheusAdapterConstruct(
     monitoring_namespace=eks_cluster_stack.monitoring_namespace,
     compute_mode=config.eks.compute.mode  # Pass compute mode for configuration
 )
-prometheus_adapter.node.add_dependency(eks_cluster_stack)
-prometheus_adapter.node.add_dependency(prometheus)  # Ensure Prometheus is ready first
-prometheus_adapter.node.add_dependency(eks_cluster_stack.monitoring_namespace) 
+prometheus_adapter.node.add_dependency(prometheus)  # Ensure Prometheus is ready first 
 
 # Deploy the sample metrics app (HPA created last with delay)
 sample_app = SampleAppConstruct(
@@ -199,7 +200,6 @@ otel_app = OtelAppConstruct(
     opentelemetry_namespace=eks_cluster_stack.opentelemetry_namespace,
     compute_config=config.eks.compute
 )
-otel_app.node.add_dependency(eks_cluster_stack.opentelemetry_namespace)
 # Ensure HPA is created after Prometheus Adapter
 otel_app.node.add_dependency(prometheus_adapter)
 
@@ -234,7 +234,7 @@ if config.devops_agent.enabled:
     print(f"📋 Deploying DevOps Agent Stack...")
     devops_agent_stack = DevOpsAgentStack(
         app,
-        "DevOpsAgentStack",
+        f"{STACK_PREFIX}-DevOpsAgent",
         cluster_name=config.eks.cluster_name,
         log_group_name=observability_stack.log_group.log_group_name,
         devops_agent_role_arn=config.devops_agent.role_arn,

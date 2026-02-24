@@ -1,0 +1,69 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "IdentityMessaging",
+      "Effect": "Allow",
+      "Action": [
+        "cognito-identity:Describe*",
+        "cognito-identity:Get*",
+        "cognito-identity:List*",
+        "cognito-idp:Describe*",
+        "cognito-idp:Get*",
+        "cognito-idp:List*",
+        "cognito-idp:AdminListGroupsForUser",
+        "identitystore:Describe*",
+        "identitystore:List*",
+        "iam:Get*",
+        "iam:List*",
+        "sso:Get*",
+        "sso:List*",
+        "sso-directory:SearchGroups",
+        "sso-directory:SearchUsers",
+        "ses:Describe*",
+        "ses:Get*",
+        "ses:List*",
+        "connect:Describe*",
+        "connect:Get*",
+        "connect:List*",
+        "chatbot:Describe*",
+        "chatbot:Get*",
+        "chatbot:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "IoTServices",
+      "Effect": "Allow",
+      "Action": [
+        "iot:Describe*",
+        "iot:Get*",
+        "iot:List*",
+        "iotsitewise:Describe*",
+        "iotsitewise:List*",
+        "iotwireless:Get*",
+        "iotwireless:List*",
+        "iotanalytics:Describe*",
+        "iotanalytics:List*",
+        "iotevents:Describe*",
+        "iotevents:List*",
+        "iotfleethub:Describe*",
+        "iotfleethub:List*",
+        "greengrass:Describe*",
+        "greengrass:Get*",
+        "greengrass:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

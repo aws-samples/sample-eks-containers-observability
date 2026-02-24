@@ -1,0 +1,62 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ObservabilityMonitoring",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:Describe*",
+        "cloudwatch:Get*",
+        "cloudwatch:List*",
+        "cloudwatch:GenerateQuery",
+        "logs:Describe*",
+        "logs:List*",
+        "logs:Get*",
+        "logs:FilterLogEvents",
+        "logs:StartQuery",
+        "logs:StopQuery",
+        "logs:StopLiveTail",
+        "logs:TestMetricFilter",
+        "xray:Get*",
+        "xray:List*",
+        "xray:BatchGetTraces",
+        "aps:Describe*",
+        "aps:List*",
+        "grafana:Describe*",
+        "grafana:List*",
+        "cloudtrail:Describe*",
+        "cloudtrail:Get*",
+        "cloudtrail:List*",
+        "cloudtrail:LookupEvents",
+        "cloudtrail:StartQuery",
+        "application-signals:Get*",
+        "application-signals:List*",
+        "application-signals:BatchGetServiceLevelObjectiveBudgetReport",
+        "applicationinsights:Describe*",
+        "applicationinsights:List*",
+        "synthetics:Describe*",
+        "synthetics:Get*",
+        "synthetics:List*",
+        "rum:Get*",
+        "rum:List*",
+        "evidently:Get*",
+        "evidently:List*",
+        "devops-guru:Describe*",
+        "devops-guru:Get*",
+        "devops-guru:List*",
+        "oam:Get*",
+        "oam:List*",
+        "pi:Get*",
+        "pi:List*",
+        "internetmonitor:Get*",
+        "internetmonitor:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

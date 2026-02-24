@@ -1,0 +1,84 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "StorageBackup",
+      "Effect": "Allow",
+      "Action": [
+        "s3:Get*",
+        "s3:List*",
+        "s3-outposts:Get*",
+        "s3-outposts:List*",
+        "backup:Describe*",
+        "backup:Get*",
+        "backup:List*",
+        "backup-gateway:Get*",
+        "backup-gateway:List*",
+        "elasticfilesystem:Describe*",
+        "fsx:Describe*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "S3CDKAssets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObjectAcl",
+        "s3:GetObject",
+        "s3:GetObjectVersion"
+      ],
+      "Resource": [
+        "arn:aws:s3:::amplify",
+        "arn:aws:s3:::cdk--assets--*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:ViaAWSService": "amplify.amazonaws.com",
+          "aws:PrincipalAccount": "${aws:ResourceAccount}"
+        }
+      }
+    },
+    {
+      "Sid": "DeveloperTools",
+      "Effect": "Allow",
+      "Action": [
+        "codepipeline:Get*",
+        "codepipeline:List*",
+        "codebuild:List*",
+        "codebuild:BatchGetFleets",
+        "codedeploy:Get*",
+        "codedeploy:List*",
+        "codedeploy:BatchGetDeployments",
+        "codedeploy:BatchGetDeploymentTargets",
+        "codecommit:Get*",
+        "codeartifact:Describe*",
+        "codeartifact:Get*",
+        "codeartifact:List*",
+        "codestar-connections:Get*",
+        "codestar-connections:List*",
+        "codestar-notifications:Describe*",
+        "codestar-notifications:List*",
+        "codeguru-profiler:Describe*",
+        "codeguru-profiler:Get*",
+        "codeguru-profiler:List*",
+        "codeguru-reviewer:Describe*",
+        "codeguru-reviewer:List*",
+        "signer:Get*",
+        "signer:List*",
+        "imagebuilder:Get*",
+        "imagebuilder:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

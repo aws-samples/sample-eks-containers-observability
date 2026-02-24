@@ -1,0 +1,67 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AIMLServices",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:Get*",
+        "bedrock:List*",
+        "sagemaker:Describe*",
+        "sagemaker:List*",
+        "comprehend:Describe*",
+        "comprehend:List*",
+        "rekognition:Describe*",
+        "rekognition:List*",
+        "forecast:Describe*",
+        "forecast:List*",
+        "lookoutmetrics:Describe*",
+        "lookoutmetrics:List*",
+        "lookoutvision:Describe*",
+        "lookoutvision:List*",
+        "personalize:Describe*",
+        "personalize:List*",
+        "kendra:Describe*",
+        "kendra:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "ApplicationIntegration",
+      "Effect": "Allow",
+      "Action": [
+        "amplify:Get*",
+        "amplify:List*",
+        "appsync:Get*",
+        "appsync:List*",
+        "appconfig:Get*",
+        "appconfig:List*",
+        "apprunner:Describe*",
+        "apprunner:List*",
+        "appflow:Describe*",
+        "appflow:List*",
+        "appstream:Describe*",
+        "appstream:List*",
+        "sns:Get*",
+        "sns:List*",
+        "sqs:Get*",
+        "sqs:List*",
+        "pipes:Describe*",
+        "pipes:List*",
+        "scheduler:Get*",
+        "scheduler:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

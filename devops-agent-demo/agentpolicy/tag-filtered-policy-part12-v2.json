@@ -1,0 +1,37 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "MiscServices",
+      "Effect": "Allow",
+      "Action": [
+        "devicefarm:Get*",
+        "devicefarm:List*",
+        "mobiletargeting:Get*",
+        "mobiletargeting:List*",
+        "schemas:Describe*",
+        "schemas:Get*",
+        "schemas:List*",
+        "lex:Describe*",
+        "lex:List*",
+        "ds:Describe*",
+        "launchwizard:Get*",
+        "launchwizard:List*",
+        "ce:Describe*",
+        "ce:Get*",
+        "ce:List*",
+        "budgets:Describe*",
+        "budgets:List*",
+        "health:DescribeEvents",
+        "health:DescribeEventDetails",
+        "application-autoscaling:Describe*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

@@ -13,20 +13,25 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 
 class TrafficGenerator:
-    def __init__(self, base_url, app_name, duration=300, requests_per_second=10, error_rate=0.1):
+    def __init__(self, base_url, app_name, duration=300, requests_per_second=10, error_rate=0.1, endpoints=None):
         self.base_url = base_url
         self.app_name = app_name
         self.duration = duration
         self.requests_per_second = requests_per_second
         self.error_rate = error_rate
+        self.endpoints = endpoints or ["/"]
         self.total_requests = 0
         self.successful_requests = 0
         self.failed_requests = 0
         self.start_time = None
         
-    def make_request(self, endpoint="/"):
+    def make_request(self, endpoint=None):
         """Make a single HTTP request"""
         try:
+            # Pick a valid endpoint for this app if none specified
+            if endpoint is None:
+                endpoint = random.choice(self.endpoints)
+
             # Randomly introduce errors based on error_rate
             if random.random() < self.error_rate:
                 # Try to hit a non-existent endpoint to generate 404s
@@ -167,22 +172,26 @@ Examples:
         'sample-metrics': {
             'name': 'Sample Metrics App',
             'url': args.base_url or 'http://localhost:8000',
-            'port': 8000
+            'port': 8000,
+            'endpoints': ['/']
         },
         'otel': {
             'name': 'Python OTEL App',
             'url': args.base_url or 'http://localhost:8080',
-            'port': 8080
+            'port': 8080,
+            'endpoints': ['/']
         },
         'go-otel': {
             'name': 'Go OTEL App',
             'url': args.base_url or 'http://localhost:8090',
-            'port': 8090
+            'port': 8090,
+            'endpoints': ['/health', '/api', '/metrics']
         },
         'java-otel': {
             'name': 'Java OTEL App',
             'url': args.base_url or 'http://localhost:8081',
-            'port': 8081
+            'port': 8081,
+            'endpoints': ['/health', '/api/users', '/api/products']
         }
     }
     
@@ -207,7 +216,8 @@ Examples:
     for app_key in target_apps:
         app = apps[app_key]
         try:
-            response = requests.get(app['url'], timeout=2)
+            check_endpoint = app.get('endpoints', ['/'])[0]
+            response = requests.get(f"{app['url']}{check_endpoint}", timeout=2)
             print(f"✓ {app['name']} is accessible at {app['url']}")
             accessible_apps.append(app_key)
         except requests.exceptions.RequestException as e:
@@ -236,7 +246,8 @@ Examples:
             app_name=app['name'],
             duration=args.duration,
             requests_per_second=args.rps,
-            error_rate=args.error_rate
+            error_rate=args.error_rate,
+            endpoints=app.get('endpoints', ['/'])
         )
         generator.generate_traffic()
     else:
@@ -250,7 +261,8 @@ Examples:
                     app_name=app['name'],
                     duration=args.duration,
                     requests_per_second=args.rps,
-                    error_rate=args.error_rate
+                    error_rate=args.error_rate,
+                    endpoints=app.get('endpoints', ['/'])
                 )
                 futures.append(executor.submit(generator.generate_traffic))
             

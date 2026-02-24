@@ -1,0 +1,47 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SecurityCompliance",
+      "Effect": "Allow",
+      "Action": [
+        "guardduty:Get*",
+        "guardduty:List*",
+        "securityhub:Describe*",
+        "securityhub:Get*",
+        "securityhub:List*",
+        "securityhub:BatchGetAutomationRules",
+        "securityhub:BatchGetSecurityControls",
+        "detective:Get*",
+        "detective:List*",
+        "macie2:Get*",
+        "macie2:List*",
+        "access-analyzer:Get*",
+        "access-analyzer:List*",
+        "inspector:Describe*",
+        "inspector:List*",
+        "inspector2:List*",
+        "securitylake:Get*",
+        "securitylake:List*",
+        "shield:Describe*",
+        "shield:List*",
+        "wafv2:Get*",
+        "wafv2:List*",
+        "fms:Get*",
+        "fms:List*",
+        "frauddetector:BatchGetVariable",
+        "frauddetector:Describe*",
+        "frauddetector:Get*",
+        "frauddetector:List*",
+        "auditmanager:Get*",
+        "auditmanager:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

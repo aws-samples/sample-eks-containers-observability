@@ -29,7 +29,7 @@ class OtelAppConstruct(Construct):
         namespace = None  # Will be created in app.py
         
         # Create service account for the ADOT collector
-        adot_role_arn = f"arn:aws:iam::{scope.account}:role/EKS-ADOT-PrometheusRemoteWrite-EksClusterStack"
+        adot_role_arn = f"arn:aws:iam::{scope.account}:role/ADOT-PrometheusRemoteWrite-{scope.stack_name}"
         service_account = cluster.add_manifest("OtelCollectorSA", {
             "apiVersion": "v1",
             "kind": "ServiceAccount",

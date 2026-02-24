@@ -1,0 +1,67 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DatabaseServices",
+      "Effect": "Allow",
+      "Action": [
+        "rds:Describe*",
+        "rds:List*",
+        "dynamodb:Describe*",
+        "dynamodb:Get*",
+        "dynamodb:List*",
+        "elasticache:Describe*",
+        "elasticache:List*",
+        "redshift:Describe*",
+        "redshift-serverless:Get*",
+        "redshift-serverless:List*",
+        "memorydb:Describe*",
+        "memorydb:List*",
+        "qldb:Describe*",
+        "qldb:List*",
+        "healthlake:Describe*",
+        "healthlake:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "NetworkingCDN",
+      "Effect": "Allow",
+      "Action": [
+        "route53:Get*",
+        "route53:List*",
+        "route53resolver:Get*",
+        "route53resolver:List*",
+        "route53profiles:Get*",
+        "route53profiles:List*",
+        "route53-recovery-control-config:Describe*",
+        "route53-recovery-control-config:List*",
+        "route53-recovery-readiness:Get*",
+        "route53-recovery-readiness:List*",
+        "cloudfront:Describe*",
+        "cloudfront:Get*",
+        "cloudfront:List*",
+        "globalaccelerator:Describe*",
+        "globalaccelerator:List*",
+        "networkmanager:Describe*",
+        "networkmanager:Get*",
+        "networkmanager:List*",
+        "network-firewall:Describe*",
+        "network-firewall:List*",
+        "vpc-lattice:Get*",
+        "vpc-lattice:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

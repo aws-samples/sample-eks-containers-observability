@@ -52,20 +52,15 @@ def on_event(event, context):
             }
             
         elif request_type == 'Delete':
-            logger.info(f"Disabling Auto Mode for cluster: {cluster_name}")
-            
-            response = eks_client.update_cluster_config(
-                name=cluster_name,
-                computeConfig={
-                    'enabled': False
-                }
-            )
-            
+            logger.info(f"Skipping Auto Mode disable for cluster: {cluster_name}")
+            # Note: Auto Mode cannot be disabled once enabled on a cluster
+            # The cluster must be deleted to remove Auto Mode
+            # Returning success to allow stack deletion to proceed
             return {
                 'PhysicalResourceId': f"{cluster_name}-auto-mode",
                 'Data': {
-                    'UpdateId': response['update']['id'],
-                    'Status': 'DISABLED'
+                    'Status': 'SKIPPED',
+                    'Message': 'Auto Mode cannot be disabled - cluster deletion will remove it'
                 }
             }
             

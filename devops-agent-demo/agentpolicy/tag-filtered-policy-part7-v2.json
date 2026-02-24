@@ -1,0 +1,53 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ManagementGovernance",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:Describe*",
+        "cloudformation:Get*",
+        "cloudformation:List*",
+        "ssm:Describe*",
+        "ssm:Get*",
+        "ssm:List*",
+        "ssm-contacts:Get*",
+        "ssm-contacts:List*",
+        "ssm-incidents:Get*",
+        "ssm-incidents:List*",
+        "ssm-sap:Get*",
+        "ssm-sap:List*",
+        "organizations:Describe*",
+        "organizations:List*",
+        "config:Describe*",
+        "config:Get*",
+        "config:List*",
+        "events:Describe*",
+        "events:List*",
+        "states:Describe*",
+        "states:Get*",
+        "states:List*",
+        "resource-groups:Get*",
+        "resource-groups:List*",
+        "resource-explorer-2:Get*",
+        "resource-explorer-2:List*",
+        "tag:GetResources",
+        "servicequotas:Get*",
+        "license-manager:Get*",
+        "license-manager:List*",
+        "arc-zonal-shift:Get*",
+        "arc-zonal-shift:List*",
+        "fis:Get*",
+        "fis:List*",
+        "resiliencehub:Describe*",
+        "resiliencehub:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

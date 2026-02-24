@@ -8,6 +8,7 @@ from aws_cdk import (
     Duration,
 )
 import json
+import re
 from constructs import Construct
 from eks_platform.config import EksConfig, constants
 
@@ -39,18 +40,16 @@ class EksClusterStack(Stack):
         else:
             self.cluster = self._create_auto_mode_cluster(eks_config, vpc, kubectl_layer, cluster_role)
         
-        # Create namespaces immediately after cluster creation
+        # Configure compute mode specific settings (Auto Mode only)
+        if eks_config.compute.mode == "auto-mode":
+            self._enable_auto_mode(node_group_role)
+        
+        # Create namespaces after cluster is ready
         self._create_namespaces(eks_config)
         
         # For Fargate, ensure namespaces are ready before proceeding
         if eks_config.compute.mode == "fargate":
             self._ensure_fargate_namespaces_ready(eks_config)
-        
-        # Namespaces will be created automatically after cluster
-        
-        # Configure compute mode specific settings (Auto Mode only)
-        if eks_config.compute.mode == "auto-mode":
-            self._enable_auto_mode(node_group_role)
         
         # Configure admin access
         self._configure_admin_access(eks_config)
@@ -158,6 +157,8 @@ class EksClusterStack(Stack):
             }
         })
         
+        # Ensure namespaces are created after cluster is fully ready
+        # This is handled by CDK's kubectl provider which waits for cluster
 
 
     def _create_cluster_service_role(self):
@@ -394,6 +395,9 @@ class EksClusterStack(Stack):
             f"{oidc_provider_url}:aud": "sts.amazonaws.com"
         })
         
+        # Sanitize stack name for IAM role name (only alphanumeric, _+=,.@- allowed, max 64 chars total)
+        sanitized_stack_name = re.sub(r'[^a-zA-Z0-9_+=,.@-]', '-', self.stack_name)[:30]
+        
         # Create ADOT role
         self.adot_role = iam.Role(
             self, "AdotCollectorRole",
@@ -402,7 +406,7 @@ class EksClusterStack(Stack):
                 conditions={"StringEquals": string_equals},
                 assume_role_action="sts:AssumeRoleWithWebIdentity"
             ),
-            role_name=f"EKS-ADOT-PrometheusRemoteWrite-{self.stack_name}"
+            role_name=f"ADOT-PrometheusRemoteWrite-{sanitized_stack_name}"
         )
         
         # Add comprehensive permissions for Auto Mode observability
@@ -436,7 +440,7 @@ class EksClusterStack(Stack):
     def _configure_logging(self):
         """Configure logging for Auto Mode cluster"""
         # Enable control plane logging
-        self.cluster.add_manifest("ClusterLogging", {
+        self.cluster_logging = self.cluster.add_manifest("ClusterLogging", {
             "apiVersion": "v1",
             "kind": "ConfigMap",
             "metadata": {

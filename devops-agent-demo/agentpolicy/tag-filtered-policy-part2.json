@@ -1,0 +1,65 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "MessagingStorage",
+      "Effect": "Allow",
+      "Action": [
+        "sns:Get*",
+        "sns:List*",
+        "sqs:Get*",
+        "sqs:List*",
+        "s3:Get*",
+        "s3:List*",
+        "kms:Describe*",
+        "kms:List*",
+        "kms:Get*",
+        "secretsmanager:Describe*",
+        "secretsmanager:List*",
+        "secretsmanager:Get*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "ObservabilityAI",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:Get*",
+        "bedrock:List*",
+        "aps:*",
+        "grafana:*",
+        "cloudtrail:Describe*",
+        "cloudtrail:Get*",
+        "cloudtrail:List*",
+        "cloudtrail:LookupEvents",
+        "cloudtrail:StartQuery",
+        "xray:Get*",
+        "xray:List*",
+        "xray:BatchGetTraces",
+        "application-signals:*",
+        "applicationinsights:*",
+        "synthetics:Describe*",
+        "synthetics:Get*",
+        "synthetics:List*",
+        "rum:Get*",
+        "rum:List*",
+        "evidently:Get*",
+        "evidently:List*",
+        "devops-guru:*",
+        "oam:Get*",
+        "oam:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

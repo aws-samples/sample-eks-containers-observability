@@ -1,0 +1,81 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DataAnalytics",
+      "Effect": "Allow",
+      "Action": [
+        "glue:Get*",
+        "glue:List*",
+        "glue:querySchemaVersionMetadata",
+        "athena:Get*",
+        "athena:List*",
+        "kinesis:*",
+        "kinesisanalytics:*",
+        "kinesisvideo:Describe*",
+        "firehose:*",
+        "kafka:*",
+        "kafkaconnect:*",
+        "timestream:*",
+        "es:Describe*",
+        "es:List*",
+        "aoss:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "DevelopmentSecurity",
+      "Effect": "Allow",
+      "Action": [
+        "codepipeline:Get*",
+        "codepipeline:List*",
+        "codebuild:List*",
+        "codebuild:BatchGetFleets",
+        "codedeploy:*",
+        "codecommit:Get*",
+        "codeartifact:*",
+        "codestar-connections:Get*",
+        "codestar-connections:List*",
+        "guardduty:Get*",
+        "guardduty:List*",
+        "securityhub:*",
+        "detective:Get*",
+        "detective:List*",
+        "macie2:Get*",
+        "macie2:List*",
+        "access-analyzer:Get*",
+        "access-analyzer:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "S3CDKAssets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObjectAcl",
+        "s3:GetObject",
+        "s3:GetObjectVersion"
+      ],
+      "Resource": [
+        "arn:aws:s3:::amplify",
+        "arn:aws:s3:::cdk--assets--*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:ViaAWSService": "amplify.amazonaws.com",
+          "aws:PrincipalAccount": "${aws:ResourceAccount}"
+        }
+      }
+    }
+  ]
+}

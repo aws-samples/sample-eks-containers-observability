@@ -1,0 +1,1889 @@
+{
+
+	"Version": "2012-10-17",
+
+	"Statement": [
+
+		{
+
+			"Sid": "VisualEditor0",
+
+			"Effect": "Allow",
+
+			"Action": "apigateway:GET",
+
+			"Resource": [
+
+				"arn:aws:apigateway:*::/apis/*/stages",
+
+				"arn:aws:apigateway:*::/domainnames/*",
+
+				"arn:aws:apigateway:*::/apis/*/integrations/*",
+
+				"arn:aws:apigateway:*::/apis/*/integrations",
+
+				"arn:aws:apigateway:*::/apis/*/deployments",
+
+				"arn:aws:apigateway:*::/apis/*/deployments/*",
+
+				"arn:aws:apigateway:*::/apis",
+
+				"arn:aws:apigateway:*::/apis/*/stages/*"
+
+			]
+
+		},
+
+		{
+
+			"Sid": "VisualEditor1",
+
+			"Effect": "Allow",
+
+			"Action": "apigateway:GET",
+
+			"Resource": "arn:aws:apigateway:*::/apis/*"
+
+		},
+
+		{
+
+			"Sid": "VisualEditor2",
+
+			"Effect": "Allow",
+
+			"Action": "apigateway:GET",
+
+			"Resource": [
+
+				"arn:aws:apigateway:*::/restapis",
+
+				"arn:aws:apigateway:*::/restapis/*",
+
+				"arn:aws:apigateway:*::/restapis/*/deployments",
+
+				"arn:aws:apigateway:*::/restapis/*/deployments/*",
+
+				"arn:aws:apigateway:*::/restapis/*/resources/*/methods/*/integrations",
+
+				"arn:aws:apigateway:*::/restapis/*/resources/*/methods/*/integrations/*",
+
+				"arn:aws:apigateway:*::/restapis/*/stages",
+
+				"arn:aws:apigateway:*::/restapis/*/stages/*"
+
+			]
+
+		},
+
+		{
+
+			"Sid": "VisualEditor3",
+
+			"Effect": "Allow",
+
+			"Action": "apigateway:GET",
+
+			"Resource": [
+
+				"arn:aws:apigateway:*::/restapis/*/deployments/*",
+
+				"arn:aws:apigateway:*::/restapis/*/stages/*",
+
+				"arn:aws:apigateway:*::/restapis/*/deployments",
+
+				"arn:aws:apigateway:*::/restapis/*/resources/*/methods/*/integrations",
+
+				"arn:aws:apigateway:*::/restapis/*/resources/*/methods/*/integrations/*",
+
+				"arn:aws:apigateway:*::/restapis/*/stages"
+
+			]
+
+		},
+
+		{
+
+			"Sid": "VisualEditor4",
+
+			"Effect": "Allow",
+
+			"Action": "apigateway:GET",
+
+			"Resource": [
+
+				"arn:aws:apigateway:*::/domainnames/*",
+
+				"arn:aws:apigateway:*::/restapis/*",
+
+				"arn:aws:apigateway:*::/restapis"
+
+			]
+
+		},
+
+		{
+
+			"Sid": "VisualEditor5",
+
+			"Effect": "Allow",
+
+			"Action": "apigateway:GET",
+
+			"Resource": [
+
+				"arn:aws:apigateway:*::/apis",
+
+				"arn:aws:apigateway:*::/apis/*",
+
+				"arn:aws:apigateway:*::/apis/*/deployments",
+
+				"arn:aws:apigateway:*::/apis/*/deployments/*",
+
+				"arn:aws:apigateway:*::/apis/*/integrations",
+
+				"arn:aws:apigateway:*::/apis/*/integrations/*",
+
+				"arn:aws:apigateway:*::/apis/*/stages",
+
+				"arn:aws:apigateway:*::/apis/*/stages/*"
+
+			]
+
+		},
+
+		{
+
+			"Sid": "VisualEditor6",
+
+			"Effect": "Allow",
+
+			"Action": [
+
+				"appstream:Describe*",
+
+				"identitystore:ListGroupMemberships",
+
+				"imagebuilder:GetImagePipeline",
+
+				"wafv2:List*",
+
+				"wafv2:GetWebACL",
+
+				"imagebuilder:GetImageRecipe",
+
+				"cloudwatch:Describe*",
+
+				"bedrock:GetAgent",
+
+				"elasticloadbalancing:GetTrustStoreRevocationContent",
+
+				"iotsitewise:List*",
+
+				"dynamodb:GetResourcePolicy",
+
+				"medialive:GetCloudWatchAlarmTemplate",
+
+				"frauddetector:BatchGetVariable",
+
+				"vpc-lattice:GetAuthPolicy",
+
+				"lambda:GetEventSourceMapping",
+
+				"cloudfront:GetPublicKey",
+
+				"dynamodb:List*",
+
+				"deadline:GetQueue",
+
+				"mediapackage-vod:Describe*",
+
+				"sso:ListManagedPoliciesInPermissionSet",
+
+				"s3-outposts:GetAccessPointPolicy",
+
+				"m2:GetEnvironment",
+
+				"workspaces:Describe*",
+
+				"groundstation:List*",
+
+				"tag:GetResources",
+
+				"nimble:GetStreamingImage",
+
+				"lightsail:GetLoadBalancerTlsCertificates",
+
+				"pca-connector-scep:GetConnector",
+
+				"servicequotas:GetServiceQuota",
+
+				"cognito-identity:GetIdentityPoolRoles",
+
+				"securitylake:List*",
+
+				"license-manager:List*",
+
+				"athena:GetWorkGroup",
+
+				"ce:List*",
+
+				"batch:DescribeSchedulingPolicies",
+
+				"ses:GetConfigurationSet",
+
+				"networkmanager:GetConnectPeer",
+
+				"transfer:Describe*",
+
+				"networkmanager:List*",
+
+				"xray:GetTraceSummaries",
+
+				"gamelift:List*",
+
+				"ec2:GetIpamPoolAllocations",
+
+				"imagebuilder:GetWorkflow",
+
+				"access-analyzer:GetAnalyzer",
+
+				"iam:ListRoles",
+
+				"arc-zonal-shift:List*",
+
+				"kafkaconnect:Describe*",
+
+				"ec2:Describe*",
+
+				"deadline:List*",
+
+				"ecr:Describe*",
+
+				"cleanrooms:GetConfiguredTableAssociation",
+
+				"wafv2:GetLoggingConfiguration",
+
+				"cognito-idp:ListIdentityProviders",
+
+				"iotsitewise:Describe*",
+
+				"logs:GetDeliveryDestination",
+
+				"iam:ListVirtualMFADevices",
+
+				"s3:GetBucketObjectLockConfiguration",
+
+				"groundstation:GetDataflowEndpointGroup",
+
+				"evidently:GetSegment",
+
+				"oam:List*",
+
+				"codepipeline:GetPipeline",
+
+				"redshift-serverless:GetNamespace",
+
+				"resource-explorer-2:List*",
+
+				"cloudwatch:GetInsightRuleReport",
+
+				"sagemaker:List*",
+
+				"cloudfront:GetResponseHeadersPolicy",
+
+				"ivs:GetEncoderConfiguration",
+
+				"synthetics:GetGroup",
+
+				"chatbot:GetMicrosoftTeamsChannelConfiguration",
+
+				"athena:GetPreparedStatement",
+
+				"s3-outposts:GetLifecycleConfiguration",
+
+				"logs:GetQueryResults",
+
+				"organizations:List*",
+
+				"nimble:List*",
+
+				"glue:GetJob",
+
+				"resource-groups:GetGroupQuery",
+
+				"iot:GetPackageVersion",
+
+				"autoscaling:Describe*",
+
+				"cloudwatch:GenerateQuery",
+
+				"medialive:GetSignalMap",
+
+				"s3:GetBucketLogging",
+
+				"mediapackagev2:GetChannel",
+
+				"cloudtrail:GetEventSelectors",
+
+				"lambda:GetLayerVersionPolicy",
+
+				"s3:GetEncryptionConfiguration",
+
+				"iot:Describe*",
+
+				"amplify:GetDomainAssociation",
+
+				"backup:List*",
+
+				"groundstation:GetConfig",
+
+				"ecr:GetRegistryPolicy",
+
+				"application-autoscaling:Describe*",
+
+				"s3:GetMultiRegionAccessPointPolicy",
+
+				"s3:GetAccessPointPolicyStatusForObjectLambda",
+
+				"lambda:GetFunction",
+
+				"ses:Describe*",
+
+				"imagebuilder:GetDistributionConfiguration",
+
+				"workspaces-web:GetBrowserSettings",
+
+				"iam:ListOpenIDConnectProviders",
+
+				"cognito-identity:ListTagsForResource",
+
+				"ram:List*",
+
+				"ses:GetAddonInstance",
+
+				"pca-connector-scep:List*",
+
+				"iotwireless:GetDestination",
+
+				"glue:querySchemaVersionMetadata",
+
+				"ec2:GetVerifiedAccessGroupPolicy",
+
+				"comprehend:Describe*",
+
+				"wafv2:GetIPSet",
+
+				"xray:GetGroup",
+
+				"devicefarm:GetDevicePool",
+
+				"glue:GetTrigger",
+
+				"route53-recovery-control-config:Describe*",
+
+				"cleanrooms:GetConfiguredTable",
+
+				"qbusiness:List*",
+
+				"cloudfront:GetDistributionConfig",
+
+				"medialive:GetCloudWatchAlarmTemplateGroup",
+
+				"networkmanager:GetCoreNetworkPolicy",
+
+				"devops-guru:GetResourceCollection",
+
+				"xray:GetServiceGraph",
+
+				"lightsail:GetStaticIp",
+
+				"workspaces-web:GetPortalServiceProviderMetadata",
+
+				"cloudwatch:GetMetricStatistics",
+
+				"macie2:List*",
+
+				"elasticbeanstalk:List*",
+
+				"globalaccelerator:Describe*",
+
+				"omics:GetRunGroup",
+
+				"iam:GetRolePolicy",
+
+				"cloudfront:GetFunction",
+
+				"omics:GetSequenceStore",
+
+				"lightsail:GetLoadBalancer",
+
+				"s3:GetAccessPointPolicyForObjectLambda",
+
+				"codedeploy:GetDeploymentConfig",
+
+				"pipes:List*",
+
+				"redshift-serverless:List*",
+
+				"pi:GetResourceMetadata",
+
+				"iam:GetServiceLinkedRoleDeletionStatus",
+
+				"route53profiles:List*",
+
+				"codeguru-profiler:GetNotificationConfiguration",
+
+				"frauddetector:GetDetectors",
+
+				"s3:GetAccessGrantsInstance",
+
+				"codedeploy:GetApplication",
+
+				"iotanalytics:Describe*",
+
+				"aps:Describe*",
+
+				"glue:GetRegistry",
+
+				"guardduty:GetIPSet",
+
+				"codestar-connections:GetConnection",
+
+				"s3:GetAccessPointConfigurationForObjectLambda",
+
+				"devops-guru:Describe*",
+
+				"globalaccelerator:List*",
+
+				"route53resolver:GetFirewallRuleGroupAssociation",
+
+				"network-firewall:List*",
+
+				"kms:ListAliases",
+
+				"license-manager:GetLicense",
+
+				"cognito-idp:GetLogDeliveryConfiguration",
+
+				"gamelift:Describe*",
+
+				"glue:GetSchema",
+
+				"states:GetExecutionHistory",
+
+				"signer:List*",
+
+				"ses:GetTemplate",
+
+				"securityhub:GetInsights",
+
+				"ec2:GetManagedPrefixListEntries",
+
+				"medialive:List*",
+
+				"codeguru-profiler:Describe*",
+
+				"logs:StopQuery",
+
+				"proton:GetServiceTemplate",
+
+				"ses:GetAccount",
+
+				"codecommit:GetRepository",
+
+				"securityhub:BatchGetAutomationRules",
+
+				"cloudformation:GetTemplate",
+
+				"ses:GetRuleSet",
+
+				"xray:GetSamplingRules",
+
+				"proton:GetEnvironmentTemplate",
+
+				"fis:GetExperimentTemplate",
+
+				"networkmanager:GetCustomerGatewayAssociations",
+
+				"logs:GetLogDelivery",
+
+				"mediapackagev2:GetOriginEndpointPolicy",
+
+				"guardduty:GetMalwareProtectionPlan",
+
+				"iotwireless:GetFuotaTask",
+
+				"elasticloadbalancing:GetResourcePolicy",
+
+				"route53-recovery-readiness:GetResourceSet",
+
+				"route53resolver:GetResolverQueryLogConfig",
+
+				"backup:GetRestoreTestingSelection",
+
+				"ssm-incidents:GetReplicationSet",
+
+				"bedrock:GetAgentActionGroup",
+
+				"xray:BatchGetTraces",
+
+				"timestream:List*",
+
+				"deadline:GetStorageProfile",
+
+				"athena:GetCapacityAssignmentConfiguration",
+
+				"verifiedpermissions:GetPolicy",
+
+				"ecr:GetRepositoryPolicy",
+
+				"synthetics:List*",
+
+				"iotwireless:GetMulticastGroup",
+
+				"servicecatalog:GetAttributeGroup",
+
+				"mediaconnect:Describe*",
+
+				"route53-recovery-control-config:List*",
+
+				"workspaces-web:GetUserSettings",
+
+				"cloudtrail:GetTrailStatus",
+
+				"mediapackagev2:GetChannelPolicy",
+
+				"firehose:Describe*",
+
+				"pi:ListAvailableResourceMetrics",
+
+				"payment-cryptography:GetAlias",
+
+				"resiliencehub:Describe*",
+
+				"mq:List*",
+
+				"S3:GetBucketWebsite",
+
+				"mediapackage-vod:List*",
+
+				"cleanrooms-ml:List*",
+
+				"sso:ListInstances",
+
+				"scheduler:GetScheduleGroup",
+
+				"healthlake:List*",
+
+				"iam:ListRolePolicies",
+
+				"frauddetector:GetOutcomes",
+
+				"dms:Describe*",
+
+				"opsworks-cm:List*",
+
+				"guardduty:GetMasterAccount",
+
+				"lightsail:GetContainerServices",
+
+				"cloudformation:GetResource",
+
+				"datapipeline:List*",
+
+				"amplify:List*",
+
+				"batch:DescribeJobQueues",
+
+				"s3:GetLifecycleConfiguration",
+
+				"devops-guru:List*",
+
+				"events:Describe*",
+
+				"pca-connector-ad:GetTemplateGroupAccessControlEntry",
+
+				"mediaconnect:List*",
+
+				"fms:List*",
+
+				"route53-recovery-readiness:List*",
+
+				"states:List*",
+
+				"ssm:GetDocument",
+
+				"iot:GetThingShadow",
+
+				"memorydb:List*",
+
+				"networkmanager:Describe*",
+
+				"s3:GetMultiRegionAccessPointPolicyStatus",
+
+				"aoss:BatchGetCollection",
+
+				"sso:GetPermissionsBoundaryForPermissionSet",
+
+				"medialive:GetEventBridgeRuleTemplate",
+
+				"glue:GetTable",
+
+				"osis:List*",
+
+				"logs:GetLogGroupFields",
+
+				"cloudfront:Describe*",
+
+				"frauddetector:GetEntityTypes",
+
+				"iam:GetPolicyVersion",
+
+				"acm-pca:List*",
+
+				"lakeformation:List*",
+
+				"ec2:GetSnapshotBlockPublicAccessState",
+
+				"connect:GetTaskTemplate",
+
+				"s3:GetStorageLensConfigurationTagging",
+
+				"dynamodb:Describe*",
+
+				"ssm-incidents:GetResponsePlan",
+
+				"appconfig:GetHostedConfigurationVersion",
+
+				"kms:GetKeyRotationStatus",
+
+				"fis:GetTargetAccountConfiguration",
+
+				"cognito-idp:GetWebACLForResource",
+
+				"lookoutvision:List*",
+
+				"s3:GetAccessGrantsLocation",
+
+				"workspaces-web:GetPortal",
+
+				"logs:List*",
+
+				"deadline:GetFarm",
+
+				"fms:GetPolicy",
+
+				"medialive:GetEventBridgeRuleTemplateGroup",
+
+				"vpc-lattice:GetService",
+
+				"ec2:GetTransitGatewayRouteTablePropagations",
+
+				"frauddetector:GetDetectorVersion",
+
+				"frauddetector:Describe*",
+
+				"s3:GetAccessPointForObjectLambda",
+
+				"route53resolver:GetResolverRuleAssociation",
+
+				"mediapackagev2:GetChannelGroup",
+
+				"bedrock:GetGuardrail",
+
+				"route53resolver:List*",
+
+				"s3:GetAccessGrant",
+
+				"s3:GetBucketPolicy",
+
+				"cognito-idp:ListUserPoolClients",
+
+				"rekognition:Describe*",
+
+				"ivs:GetPlaybackRestrictionPolicy",
+
+				"elasticloadbalancing:GetTrustStoreCaCertificatesBundle",
+
+				"qbusiness:GetIndex",
+
+				"route53resolver:GetResolverRule",
+
+				"vpc-lattice:GetServiceNetwork",
+
+				"airflow:List*",
+
+				"cloudfront:GetOriginRequestPolicy",
+
+				"imagebuilder:List*",
+
+				"lightsail:GetDisks",
+
+				"networkmanager:GetConnectAttachment",
+
+				"eks:Describe*",
+
+				"ec2:GetTransitGatewayRouteTableAssociations",
+
+				"health:DescribeEvents",
+
+				"appsync:GetDataSource",
+
+				"codestar-notifications:List*",
+
+				"iam:GetInstanceProfile",
+
+				"kinesis:List*",
+
+				"kinesisanalytics:Describe*",
+
+				"kendra:Describe*",
+
+				"vpc-lattice:GetAccessLogSubscription",
+
+				"logs:GetLogAnomalyDetector",
+
+				"backup:GetBackupSelection",
+
+				"sns:List*",
+
+				"cognito-idp:DescribeUserPoolDomain",
+
+				"devicefarm:List*",
+
+				"cloudwatch:GetServiceLevelObjective",
+
+				"pca-connector-ad:GetDirectoryRegistration",
+
+				"appstream:List*",
+
+				"apprunner:Describe*",
+
+				"workspaces-web:GetIdentityProvider",
+
+				"codestar-connections:List*",
+
+				"xray:List*",
+
+				"logs:StartQuery",
+
+				"resource-explorer-2:GetIndex",
+
+				"resiliencehub:List*",
+
+				"appsync:GetResolver",
+
+				"resource-groups:List*",
+
+				"lambda:GetProvisionedConcurrencyConfig",
+
+				"secretsmanager:Describe*",
+
+				"appsync:GetDomainName",
+
+				"verifiedpermissions:List*",
+
+				"logs:FilterLogEvents",
+
+				"timestream:Describe*",
+
+				"inspector2:List*",
+
+				"cognito-idp:GetGroup",
+
+				"frauddetector:GetExternalModels",
+
+				"backup:GetBackupPlan",
+
+				"pca-connector-ad:GetServicePrincipalName",
+
+				"logs:GetDeliverySource",
+
+				"cloudfront:GetRealtimeLogConfig",
+
+				"macie2:GetCustomDataIdentifier",
+
+				"backup:GetRestoreTestingPlan",
+
+				"networkmanager:GetSiteToSiteVpnAttachment",
+
+				"networkmanager:GetDevices",
+
+				"ssm-sap:GetApplication",
+
+				"kinesis:Describe*",
+
+				"s3:GetInventoryConfiguration",
+
+				"application-signals:List*",
+
+				"pca-connector-ad:GetConnector",
+
+				"lightsail:GetAlarms",
+
+				"s3-outposts:GetBucketTagging",
+
+				"lakeformation:Describe*",
+
+				"backup:GetBackupVaultAccessPolicy",
+
+				"kafkaconnect:List*",
+
+				"sns:GetDataProtectionPolicy",
+
+				"route53resolver:GetOutpostResolver",
+
+				"cognito-idp:DescribeIdentityProvider",
+
+				"robomaker:Describe*",
+
+				"cognito-identity:DescribeIdentityPool",
+
+				"ecs:Describe*",
+
+				"ssm:GetResourcePolicies",
+
+				"oam:GetLink",
+
+				"access-analyzer:List*",
+
+				"glue:GetDatabase",
+
+				"pca-connector-ad:GetTemplate",
+
+				"devicefarm:GetInstanceProfile",
+
+				"secretsmanager:GetResourcePolicy",
+
+				"networkmanager:GetVpcAttachment",
+
+				"identitystore:DescribeGroup",
+
+				"aoss:GetSecurityConfig",
+
+				"resource-explorer-2:GetDefaultView",
+
+				"qbusiness:GetRetriever",
+
+				"cloudfront:GetCachePolicy",
+
+				"ivschat:List*",
+
+				"ses:GetRelay",
+
+				"omics:GetVariantStore",
+
+				"emr-containers:Describe*",
+
+				"logs:Describe*",
+
+				"acm-pca:GetCertificate",
+
+				"route53:GetHostedZone",
+
+				"aoss:GetAccessPolicy",
+
+				"networkmanager:GetCoreNetwork",
+
+				"frauddetector:GetVariables",
+
+				"resource-groups:GetGroup",
+
+				"imagebuilder:GetInfrastructureConfiguration",
+
+				"iam:ListAttachedRolePolicies",
+
+				"elasticloadbalancing:Describe*",
+
+				"detective:GetMembers",
+
+				"es:Describe*",
+
+				"ce:GetAnomalyMonitors",
+
+				"iot:GetTopicRule",
+
+				"m2:GetApplication",
+
+				"codestar-connections:GetRepositoryLink",
+
+				"frauddetector:GetModelVersion",
+
+				"ssm:GetParameters",
+
+				"mediapackagev2:GetOriginEndpoint",
+
+				"route53resolver:GetResolverConfig",
+
+				"codebuild:List*",
+
+				"acm:DescribeCertificate",
+
+				"ivs:GetStage",
+
+				"omics:List*",
+
+				"s3:GetAnalyticsConfiguration",
+
+				"iam:GetGroupPolicy",
+
+				"codeartifact:GetRepositoryPermissionsPolicy",
+
+				"mobiletargeting:GetInAppTemplate",
+
+				"codestar-notifications:Describe*",
+
+				"iotevents:Describe*",
+
+				"lambda:GetLayerVersion",
+
+				"bedrock:GetKnowledgeBase",
+
+				"amplify:GetBranch",
+
+				"s3:GetMetricsConfiguration",
+
+				"cloudtrail:List*",
+
+				"s3:GetBucketPublicAccessBlock",
+
+				"sagemaker:Describe*",
+
+				"databrew:List*",
+
+				"m2:List*",
+
+				"macie2:GetAllowList",
+
+				"workspaces-web:GetTrustStore",
+
+				"codeartifact:Describe*",
+
+				"route53-recovery-readiness:GetCell",
+
+				"ec2:GetTransitGatewayMulticastDomainAssociations",
+
+				"logs:GetDataProtectionPolicy",
+
+				"vpc-lattice:GetListener",
+
+				"greengrass:List*",
+
+				"ses:GetTrafficPolicy",
+
+				"schemas:List*",
+
+				"vpc-lattice:GetResourcePolicy",
+
+				"guardduty:List*",
+
+				"codedeploy:List*",
+
+				"iotwireless:GetServiceProfile",
+
+				"config:Describe*",
+
+				"ses:GetEmailIdentity",
+
+				"appconfig:List*",
+
+				"workspaces-web:GetNetworkSettings",
+
+				"devicefarm:GetNetworkProfile",
+
+				"ce:GetAnomalySubscriptions",
+
+				"appflow:Describe*",
+
+				"resource-groups:GetGroupConfiguration",
+
+				"kinesisvideo:Describe*",
+
+				"kafka:Describe*",
+
+				"internetmonitor:GetMonitor",
+
+				"cloudtrail:LookupEvents",
+
+				"securitylake:GetSubscriber",
+
+				"lightsail:GetInstances",
+
+				"lambda:List*",
+
+				"s3:GetMultiRegionAccessPoint",
+
+				"iotwireless:GetWirelessDevice",
+
+				"s3:GetBucketNotification",
+
+				"ssm-contacts:List*",
+
+				"synthetics:Describe*",
+
+				"appconfig:GetEnvironment",
+
+				"sso:GetInlinePolicyForPermissionSet",
+
+				"ec2:SearchLocalGatewayRoutes",
+
+				"groundstation:GetMissionProfile",
+
+				"secretsmanager:List*",
+
+				"events:List*",
+
+				"deadline:GetQueueEnvironment",
+
+				"iam:GetOpenIDConnectProvider",
+
+				"pi:GetResourceMetrics",
+
+				"cleanrooms:GetAnalysisTemplate",
+
+				"backup-gateway:GetHypervisor",
+
+				"cognito-idp:ListUsers",
+
+				"cloudtrail:GetChannel",
+
+				"applicationinsights:Describe*",
+
+				"cloudfront:GetContinuousDeploymentPolicy",
+
+				"forecast:List*",
+
+				"ssm:GetDefaultPatchBaseline",
+
+				"securityhub:BatchGetSecurityControls",
+
+				"cognito-identity:ListIdentityPools",
+
+				"appsync:GetFunction",
+
+				"lookoutmetrics:List*",
+
+				"resource-groups:GetTags",
+
+				"oam:GetSinkPolicy",
+
+				"codeartifact:GetDomainPermissionsPolicy",
+
+				"applicationinsights:List*",
+
+				"securityhub:Describe*",
+
+				"logs:StopLiveTail",
+
+				"evidently:GetFeature",
+
+				"cognito-idp:DescribeResourceServer",
+
+				"identitystore:ListGroups",
+
+				"cloudtrail:GetInsightSelectors",
+
+				"aoss:GetSecurityPolicy",
+
+				"kinesisanalytics:List*",
+
+				"iot:GetPolicy",
+
+				"sns:GetTopicAttributes",
+
+				"appsync:GetSourceApiAssociation",
+
+				"acm-pca:Describe*",
+
+				"application-signals:BatchGetServiceLevelObjectiveBudgetReport",
+
+				"workspaces-web:GetUserAccessLoggingSettings",
+
+				"robomaker:List*",
+
+				"kms:ListKeyRotations",
+
+				"bedrock:List*",
+
+				"iot:GetPackage",
+
+				"route53resolver:GetFirewallDomainList",
+
+				"pca-connector-scep:GetChallengeMetadata",
+
+				"cleanrooms:GetCollaboration",
+
+				"imagebuilder:GetImage",
+
+				"cloudfront:GetDistribution",
+
+				"ec2:SearchTransitGatewayRoutes",
+
+				"iotwireless:GetWirelessGateway",
+
+				"route53:List*",
+
+				"verifiedpermissions:GetSchema",
+
+				"amplify:GetApp",
+
+				"omics:GetAnnotationStore",
+
+				"iotfleethub:List*",
+
+				"logs:GetDelivery",
+
+				"sqs:GetQueueUrl",
+
+				"qldb:Describe*",
+
+				"oam:GetSink",
+
+				"lambda:GetFunctionUrlConfig",
+
+				"imagebuilder:GetLifecyclePolicy",
+
+				"sso:ListAccountAssignments",
+
+				"securityhub:GetConfigurationPolicy",
+
+				"iotwireless:List*",
+
+				"s3:GetBucketMetadataTableConfiguration",
+
+				"ivschat:GetLoggingConfiguration",
+
+				"organizations:Describe*",
+
+				"evidently:GetProject",
+
+				"qbusiness:GetWebExperience",
+
+				"sso:GetManagedApplicationInstance",
+
+				"kinesis:GetResourcePolicy",
+
+				"shield:List*",
+
+				"s3:GetAccelerateConfiguration",
+
+				"lookoutmetrics:Describe*",
+
+				"sso:GetSharedSsoConfiguration",
+
+				"lightsail:GetInstance",
+
+				"backup:GetBackupVaultNotifications",
+
+				"datasync:Describe*",
+
+				"kafka:GetClusterPolicy",
+
+				"codepipeline:List*",
+
+				"codeguru-profiler:GetPolicy",
+
+				"securityhub:GetFindingAggregator",
+
+				"emr-serverless:GetApplication",
+
+				"dms:List*",
+
+				"cognito-idp:DescribeUserImportJob",
+
+				"macie2:GetMacieSession",
+
+				"qbusiness:GetDataSource",
+
+				"health:DescribeEventDetails",
+
+				"ds:Describe*",
+
+				"logs:GetDeliveryDestinationPolicy",
+
+				"s3-outposts:List*",
+
+				"lightsail:GetDisk",
+
+				"ce:Describe*",
+
+				"ec2:GetAssociatedEnclaveCertificateIamRoles",
+
+				"qldb:List*",
+
+				"codeguru-profiler:List*",
+
+				"deadline:GetQueueFleetAssociation",
+
+				"frauddetector:GetLabels",
+
+				"kms:ListKeys",
+
+				"sso:ListApplicationAssignments",
+
+				"guardduty:GetDetector",
+
+				"networkmanager:GetTransitGatewayPeering",
+
+				"sso-directory:SearchGroups",
+
+				"macie2:GetFindingsFilter",
+
+				"rds:Describe*",
+
+				"cognito-idp:ListResourceServers",
+
+				"omics:GetWorkflow",
+
+				"eks:List*",
+
+				"lambda:GetAlias",
+
+				"guardduty:GetFilter",
+
+				"ses:GetIngressPoint",
+
+				"medialive:Describe*",
+
+				"cloudtrail:GetEventDataStore",
+
+				"cognito-idp:DescribeRiskConfiguration",
+
+				"networkmanager:GetTransitGatewayRegistrations",
+
+				"mediapackage:List*",
+
+				"cleanrooms:List*",
+
+				"ssm:List*",
+
+				"cloudtrail:StartQuery",
+
+				"emr-containers:List*",
+
+				"imagebuilder:GetComponent",
+
+				"route53-recovery-readiness:GetReadinessCheck",
+
+				"appsync:GetApiAssociation",
+
+				"payment-cryptography:List*",
+
+				"ses:GetContactList",
+
+				"frauddetector:GetRules",
+
+				"cognito-idp:ListGroups",
+
+				"networkmanager:GetSites",
+
+				"mq:Describe*",
+
+				"ssm:GetPatchBaseline",
+
+				"datasync:List*",
+
+				"aps:List*",
+
+				"mobiletargeting:List*",
+
+				"logs:TestMetricFilter",
+
+				"cognito-idp:ListTagsForResource",
+
+				"s3:GetBucketVersioning",
+
+				"proton:List*",
+
+				"glue:GetTags",
+
+				"elasticache:Describe*",
+
+				"bedrock:GetAgentKnowledgeBase",
+
+				"appsync:GetIntrospectionSchema",
+
+				"iam:GetUser",
+
+				"frauddetector:GetListsMetadata",
+
+				"firehose:List*",
+
+				"greengrass:Describe*",
+
+				"wafv2:GetRuleGroup",
+
+				"codeartifact:List*",
+
+				"bedrock:GetDataSource",
+
+				"scheduler:List*",
+
+				"cognito-idp:DescribeUserPool",
+
+				"vpc-lattice:GetServiceNetworkVpcAssociation",
+
+				"s3:GetIntelligentTieringConfiguration",
+
+				"ses:GetArchive",
+
+				"route53resolver:GetResolverQueryLogConfigAssociation",
+
+				"ses:GetDedicatedIps",
+
+				"frauddetector:GetEventTypes",
+
+				"datapipeline:Describe*",
+
+				"ivs:GetChannel",
+
+				"elasticfilesystem:Describe*",
+
+				"refactor-spaces:GetRoute",
+
+				"lambda:GetFunctionRecursionConfig",
+
+				"iotwireless:GetDeviceProfile",
+
+				"cloudtrail:Describe*",
+
+				"acm-pca:GetCertificateAuthorityCertificate",
+
+				"ec2:GetNetworkInsightsAccessScopeContent",
+
+				"sqs:GetQueueAttributes",
+
+				"lakeformation:GetLFTag",
+
+				"iotfleethub:Describe*",
+
+				"aoss:List*",
+
+				"aoss:BatchGetVpcEndpoint",
+
+				"lakeformation:GetResourceLFTags",
+
+				"ssm-contacts:GetContact",
+
+				"batch:List*",
+
+				"vpc-lattice:GetRule",
+
+				"appconfig:GetApplication",
+
+				"kafka:List*",
+
+				"schemas:Describe*",
+
+				"launchwizard:GetDeployment",
+
+				"refactor-spaces:GetApplication",
+
+				"s3:GetAccessPoint",
+
+				"iam:GetGroup",
+
+				"cognito-idp:GetUICustomization",
+
+				"apprunner:List*",
+
+				"signer:GetSigningProfile",
+
+				"refactor-spaces:List*",
+
+				"lambda:GetRuntimeManagementConfig",
+
+				"sso-directory:SearchUsers",
+
+				"cloudfront:GetCloudFrontOriginAccessIdentity",
+
+				"kms:DescribeKey",
+
+				"deadline:GetLicenseEndpoint",
+
+				"iam:GetSAMLProvider",
+
+				"workspaces-web:List*",
+
+				"schemas:GetResourcePolicy",
+
+				"ssm-contacts:GetContactChannel",
+
+				"comprehend:List*",
+
+				"securityhub:GetEnabledStandards",
+
+				"lightsail:GetCertificates",
+
+				"databrew:Describe*",
+
+				"lex:List*",
+
+				"cognito-idp:GetUserPoolMfaConfig",
+
+				"glue:GetDatabases",
+
+				"inspector:List*",
+
+				"ssm-incidents:List*",
+
+				"frauddetector:GetListElements",
+
+				"auditmanager:List*",
+
+				"ssm:Describe*",
+
+				"route53profiles:GetProfile",
+
+				"greengrass:GetDeployment",
+
+				"s3:GetBucketLocation",
+
+				"lambda:GetPolicy",
+
+				"lex:Describe*",
+
+				"nimble:GetStudio",
+
+				"cloudfront:GetMonitoringSubscription",
+
+				"connect:Describe*",
+
+				"s3:List*",
+
+				"batch:DescribeComputeEnvironments",
+
+				"athena:GetCapacityReservation",
+
+				"cloudwatch:GetService",
+
+				"nimble:GetStudioComponent",
+
+				"kendra:List*",
+
+				"route53-recovery-readiness:GetRecoveryGroup",
+
+				"ec2:GetVerifiedAccessEndpointPolicy",
+
+				"ecr:GetLifecyclePolicy",
+
+				"iam:GetRole",
+
+				"chatbot:List*",
+
+				"deadline:GetMonitor",
+
+				"lightsail:GetLoadBalancers",
+
+				"launchwizard:List*",
+
+				"fis:List*",
+
+				"opsworks-cm:Describe*",
+
+				"networkmanager:GetTransitGatewayRouteTableAttachment",
+
+				"iot:GetV2LoggingOptions",
+
+				"appsync:GetGraphqlApi",
+
+				"cognito-idp:AdminListGroupsForUser",
+
+				"s3:GetBucketTagging",
+
+				"vpc-lattice:List*",
+
+				"codeguru-reviewer:Describe*",
+
+				"appflow:List*",
+
+				"internetmonitor:List*",
+
+				"evidently:GetLaunch",
+
+				"frauddetector:List*",
+
+				"wafv2:GetRegexPatternSet",
+
+				"lightsail:GetStaticIps",
+
+				"ses:GetDedicatedIpPool",
+
+				"cloudformation:Describe*",
+
+				"network-firewall:Describe*",
+
+				"route53profiles:GetProfileAssociation",
+
+				"lambda:GetCodeSigningConfig",
+
+				"devicefarm:GetTestGridProject",
+
+				"emr-serverless:List*",
+
+				"fsx:Describe*",
+
+				"nimble:GetLaunchProfile",
+
+				"sso:ListTagsForResource",
+
+				"aoss:BatchGetLifecyclePolicy",
+
+				"guardduty:GetThreatIntelSet",
+
+				"iam:ListServerCertificates",
+
+				"athena:GetNamedQuery",
+
+				"iot:GetTopicRuleDestination",
+
+				"states:Describe*",
+
+				"rekognition:List*",
+
+				"iot:List*",
+
+				"iam:GetServerCertificate",
+
+				"detective:List*",
+
+				"guardduty:GetMembers",
+
+				"sns:GetSubscriptionAttributes",
+
+				"cloudtrail:GetQueryResults",
+
+				"imagebuilder:GetContainerRecipe",
+
+				"sqs:List*",
+
+				"redshift:Describe*",
+
+				"chatbot:Describe*",
+
+				"grafana:List*",
+
+				"cloudfront:GetOriginAccessControl",
+
+				"cleanrooms:GetMembership",
+
+				"ses:GetEmailTemplate",
+
+				"route53resolver:GetFirewallRuleGroup",
+
+				"ssm-sap:List*",
+
+				"payment-cryptography:GetKey",
+
+				"application-signals:GetService",
+
+				"refactor-spaces:GetEnvironment",
+
+				"cloudwatch:GetMetricData",
+
+				"personalize:List*",
+
+				"synthetics:GetCanary",
+
+				"iotwireless:GetWirelessGatewayTaskDefinition",
+
+				"application-signals:GetServiceLevelObjective",
+
+				"ram:GetPermission",
+
+				"evidently:GetExperiment",
+
+				"shield:Describe*",
+
+				"networkmanager:GetLinkAssociations",
+
+				"route53:GetDNSSEC",
+
+				"ecs:List*",
+
+				"redshift-serverless:GetWorkgroup",
+
+				"codedeploy:BatchGetDeploymentTargets",
+
+				"pca-connector-ad:List*",
+
+				"datapipeline:GetPipelineDefinition",
+
+				"personalize:Describe*",
+
+				"ec2:GetVerifiedAccessInstanceWebAcl",
+
+				"glue:GetSchemaVersion",
+
+				"lambda:GetFunctionEventInvokeConfig",
+
+				"budgets:Describe*",
+
+				"appconfig:GetConfigurationProfile",
+
+				"s3:GetAccessPointPolicy",
+
+				"ses:GetAddonSubscription",
+
+				"s3-outposts:GetAccessPoint",
+
+				"sso:ListCustomerManagedPolicyReferencesInPermissionSet",
+
+				"ec2:GetIpamPoolCidrs",
+
+				"wafv2:GetWebACLForResource",
+
+				"athena:List*",
+
+				"route53:GetHealthCheck",
+
+				"lambda:GetFunctionConfiguration",
+
+				"s3:GetStorageLensGroup",
+
+				"devicefarm:GetProject",
+
+				"cleanrooms:GetConfiguredTableAnalysisRule",
+
+				"lookoutvision:Describe*",
+
+				"lightsail:GetBuckets",
+
+				"inspector:Describe*",
+
+				"cloudfront:List*",
+
+				"verifiedpermissions:GetIdentitySource",
+
+				"cloudtrail:GetTrail",
+
+				"iam:GetPolicy",
+
+				"glue:List*",
+
+				"route53profiles:GetProfileResourceAssociation",
+
+				"backup-gateway:List*",
+
+				"s3:GetReplicationConfiguration",
+
+				"lambda:GetFunctionCodeSigningConfig",
+
+				"arc-zonal-shift:GetManagedResource",
+
+				"qbusiness:GetPlugin",
+
+				"ecr:List*",
+
+				"cloudformation:GetStackPolicy",
+
+				"servicecatalog:Describe*",
+
+				"servicecatalog:GetApplication",
+
+				"cloudwatch:GetMetricStream",
+
+				"ivs:List*",
+
+				"evidently:List*",
+
+				"forecast:Describe*",
+
+				"deadline:GetFleet",
+
+				"securityhub:GetConfigurationPolicyAssociation",
+
+				"kms:ListResourceTags",
+
+				"qbusiness:GetApplication",
+
+				"elasticmapreduce:List*",
+
+				"networkmanager:GetLinks",
+
+				"memorydb:Describe*",
+
+				"auditmanager:GetAssessment",
+
+				"devicefarm:GetVPCEConfiguration",
+
+				"vpc-lattice:GetServiceNetworkServiceAssociation",
+
+				"s3:GetStorageLensConfiguration",
+
+				"codedeploy:BatchGetDeployments",
+
+				"osis:GetPipeline",
+
+				"s3:GetBucketCORS",
+
+				"pipes:Describe*",
+
+				"iam:GetLoginProfile",
+
+				"healthlake:Describe*",
+
+				"iotanalytics:List*",
+
+				"codeguru-reviewer:List*",
+
+				"appsync:List*",
+
+				"ses:List*",
+
+				"budgets:List*",
+
+				"elasticmapreduce:Describe*",
+
+				"fms:GetNotificationChannel",
+
+				"cloudfront:GetKeyGroup",
+
+				"iotwireless:GetNetworkAnalyzerConfiguration",
+
+				"cloudformation:List*",
+
+				"cloudtrail:GetResourcePolicy",
+
+				"iotevents:List*",
+
+				"omics:GetReferenceStore",
+
+				"cloudwatch:GetDashboard",
+
+				"codecommit:GetRepositoryTriggers",
+
+				"ivs:GetRecordingConfiguration",
+
+				"mediapackage:Describe*",
+
+				"bedrock:GetAgentAlias",
+
+				"resource-explorer-2:GetView",
+
+				"elasticbeanstalk:Describe*",
+
+				"verifiedpermissions:GetPolicyTemplate",
+
+				"cleanrooms-ml:GetTrainingDataset",
+
+				"cognito-idp:ListUserPools",
+
+				"ses:GetConfigurationSetEventDestinations",
+
+				"s3-outposts:GetBucketPolicy",
+
+				"verifiedpermissions:GetPolicyStore",
+
+				"s3-outposts:GetBucket",
+
+				"iam:GetUserPolicy",
+
+				"acm-pca:GetCertificateAuthorityCsr",
+
+				"transfer:List*",
+
+				"servicecatalog:List*",
+
+				"ivschat:GetRoom",
+
+				"xray:GetGroups",
+
+				"mediapackagev2:List*",
+
+				"pi:ListAvailableResourceDimensions",
+
+				"scheduler:GetSchedule",
+
+				"grafana:Describe*",
+
+				"rds:List*",
+
+				"athena:GetDataCatalog",
+
+				"rum:GetAppMonitor",
+
+				"identitystore:DescribeGroupMembership",
+
+				"elasticache:List*",
+
+				"s3:GetBucketOwnershipControls",
+
+				"connect:List*",
+
+				"backup:Describe*",
+
+				"codebuild:BatchGetFleets",
+
+				"vpc-lattice:GetTargetGroup",
+
+				"acm:GetAccountConfiguration",
+
+				"sso:ListApplications",
+
+				"cloudwatch:List*",
+
+				"s3:GetBucketAcl",
+
+				"codestar-connections:GetSyncConfiguration",
+
+				"config:List*",
+
+				"config:GetStoredQuery",
+
+				"securityhub:List*",
+
+				"es:List*",
+
+				"codepipeline:GetPipelineState",
+
+				"rum:List*"
+
+			],
+
+			"Resource": "*"
+
+		},
+
+		{
+
+			"Sid": "VisualEditor7",
+
+			"Effect": "Allow",
+
+			"Action": [
+
+				"s3:GetObjectAcl",
+
+				"s3:GetObject",
+
+				"s3:GetObjectVersion"
+
+			],
+
+			"Resource": [
+
+				"arn:aws:s3:::amplify",
+
+				"arn:aws:s3:::cdk--assets--*"
+
+			],
+
+			"Condition": {
+
+				"StringEquals": {
+
+					"aws:ViaAWSService": "amplify.amazonaws.com",
+
+					"aws:PrincipalAccount": "${aws:ResourceAccount}"
+
+				}
+
+			}
+
+		}
+
+	]
+
+}

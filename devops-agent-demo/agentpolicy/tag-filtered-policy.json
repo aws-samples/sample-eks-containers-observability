@@ -1,0 +1,54 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ApiGatewayReadAccess",
+      "Effect": "Allow",
+      "Action": "apigateway:GET",
+      "Resource": [
+        "arn:aws:apigateway:*::/apis/*/stages",
+        "arn:aws:apigateway:*::/domainnames/*",
+        "arn:aws:apigateway:*::/apis/*/integrations/*",
+        "arn:aws:apigateway:*::/apis/*/integrations",
+        "arn:aws:apigateway:*::/apis/*/deployments",
+        "arn:aws:apigateway:*::/apis/*/deployments/*",
+        "arn:aws:apigateway:*::/apis",
+        "arn:aws:apigateway:*::/apis/*/stages/*",
+        "arn:aws:apigateway:*::/apis/*",
+        "arn:aws:apigateway:*::/restapis",
+        "arn:aws:apigateway:*::/restapis/*",
+        "arn:aws:apigateway:*::/restapis/*/deployments",
+        "arn:aws:apigateway:*::/restapis/*/deployments/*",
+        "arn:aws:apigateway:*::/restapis/*/resources/*/methods/*/integrations",
+        "arn:aws:apigateway:*::/restapis/*/resources/*/methods/*/integrations/*",
+        "arn:aws:apigateway:*::/restapis/*/stages",
+        "arn:aws:apigateway:*::/restapis/*/stages/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "ComprehensiveReadOnlyAccessWithTagFilter",
+      "Effect": "Allow",
+      "Action": [
+        "appstream:Describe*",
+        "identitystore:ListGroupMemberships",
+        "imagebuilder:GetImagePipeline",
+        "wafv2:List*",
+        "wafv2:GetWebACL",
+        "imagebuilder:GetImageRecipe",
+        "cloudwatch:Describe*",
+        "bedrock:GetAgent",
+        "elasticloadbalancing:GetTrustStoreRevocationContent",
+        "iotsitewise:List*",
+        "dynamodb:GetResourcePolicy",
+        "medialive:GetCloudWatchAlarmTemplate",
+        "frauddetector:BatchGetVariable",
+        "vpc-lattice:GetAuthPolicy",
+        "lambda:GetEventSourceMapping",
+        "cloudfront:GetPublicKey",
+        "dynamodb:List*",
+        "deadline:GetQueue"

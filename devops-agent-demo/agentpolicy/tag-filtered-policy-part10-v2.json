@@ -1,0 +1,62 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "MediaServices",
+      "Effect": "Allow",
+      "Action": [
+        "medialive:Describe*",
+        "medialive:Get*",
+        "medialive:List*",
+        "mediapackage:Describe*",
+        "mediapackage:List*",
+        "mediapackage-vod:Describe*",
+        "mediapackage-vod:List*",
+        "mediapackagev2:Get*",
+        "mediapackagev2:List*",
+        "mediaconnect:Describe*",
+        "mediaconnect:List*",
+        "ivs:Get*",
+        "ivs:List*",
+        "ivschat:Get*",
+        "ivschat:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    },
+    {
+      "Sid": "BusinessApplications",
+      "Effect": "Allow",
+      "Action": [
+        "qbusiness:Get*",
+        "qbusiness:List*",
+        "verifiedpermissions:Get*",
+        "verifiedpermissions:List*",
+        "cleanrooms:Get*",
+        "cleanrooms:List*",
+        "cleanrooms-ml:Get*",
+        "cleanrooms-ml:List*",
+        "omics:Get*",
+        "omics:List*",
+        "gamelift:Describe*",
+        "gamelift:List*",
+        "robomaker:Describe*",
+        "robomaker:List*",
+        "groundstation:Get*",
+        "groundstation:List*",
+        "airflow:Get*",
+        "airflow:List*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/DemosFor": "OTEL-DevOpsAgent-AIforOperations"
+        }
+      }
+    }
+  ]
+}

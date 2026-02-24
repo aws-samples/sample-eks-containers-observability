@@ -41,6 +41,9 @@ class PrometheusAdapterConstruct(Construct):
             name="prometheus-adapter",
             namespace="monitoring"
         )
+        # Ensure service account is created after namespace exists
+        # This is critical - the SA manifest needs the namespace to exist first
+        prometheus_adapter_sa.node.add_dependency(self.monitoring_namespace)
         
         # Add basic AWS permissions for debugging (Prometheus Adapter queries local Prometheus, not AMP)
         prometheus_adapter_sa.add_to_principal_policy(
@@ -222,9 +225,13 @@ class PrometheusAdapterConstruct(Construct):
             }
         })
         
-        # Add dependencies between manifests (monitoring namespace created by PrometheusConstruct)
+        # Add dependencies between manifests
+        # All resources in monitoring namespace must depend on the namespace
+        prometheus_adapter_config.node.add_dependency(self.monitoring_namespace)
+        prometheus_adapter_deployment.node.add_dependency(self.monitoring_namespace)
         prometheus_adapter_deployment.node.add_dependency(prometheus_adapter_config)
         prometheus_adapter_deployment.node.add_dependency(prometheus_adapter_sa)
+        prometheus_adapter_service.node.add_dependency(self.monitoring_namespace)
         prometheus_adapter_service.node.add_dependency(prometheus_adapter_deployment)
         prometheus_adapter_apiservice.node.add_dependency(prometheus_adapter_service)
         
