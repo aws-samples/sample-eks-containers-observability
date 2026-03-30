@@ -13,7 +13,7 @@ jsii==1.112.0
 packaging==25.0
 pluggy==1.6.0
 publication==0.0.3
-Pygments==2.19.1
+Pygments==2.20.0
 pytest==8.4.0
 python-dateutil==2.9.0.post0
 six==1.17.0
