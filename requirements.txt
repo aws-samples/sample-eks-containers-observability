@@ -14,7 +14,7 @@ packaging==25.0
 pluggy==1.6.0
 publication==0.0.3
 Pygments==2.19.1
-pytest==8.4.0
+pytest==9.0.3
 python-dateutil==2.9.0.post0
 six==1.17.0
 tomli==2.2.1
