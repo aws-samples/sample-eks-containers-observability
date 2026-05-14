@@ -16,7 +16,7 @@
         <spring.boot.version>3.4.1</spring.boot.version>
         <!-- Updated to latest stable Spring Framework version -->
         <spring.framework.version>6.2.8</spring.framework.version>
-        <otel.version>1.44.1</otel.version>
+        <otel.version>1.62.0</otel.version>
         <micrometer.version>1.14.2</micrometer.version>
         <!-- Explicitly set Tomcat version to latest secure version -->
         <tomcat.version>11.0.12</tomcat.version>
