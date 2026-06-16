@@ -63,6 +63,13 @@ if "--help" in sys.argv or "-h" in sys.argv:
 # Initialize the CDK app
 app = App()
 
+# Pre-flight check: ensure kubectl binary exists for Lambda layer
+kubectl_path = os.path.join(os.path.dirname(__file__), "lambda", "kubectl-layer", "bin", "kubectl")
+if not os.path.isfile(kubectl_path):
+    print("❌ kubectl binary not found at lambda/kubectl-layer/bin/kubectl")
+    print("   Run: cd lambda/kubectl-layer && ./download-kubectl.sh && cd ../..")
+    sys.exit(1)
+
 # Get compute mode from context
 compute_mode = app.node.try_get_context("compute_mode") or "auto-mode"
 
@@ -73,10 +80,19 @@ deploy_devops_agent = str(deploy_devops_agent_flag).lower() == "true" if deploy_
 # Get DevOps Agent role ARN from context (required if deploying DevOps Agent)
 devops_agent_role_arn = app.node.try_get_context("devops_agent_role_arn")
 
+# Get Grafana flag (disable for regions without Managed Grafana, e.g. eu-north-1)
+grafana_flag = app.node.try_get_context("grafana_enabled")
+grafana_enabled = str(grafana_flag).lower() != "false" if grafana_flag else True
+
 # Print current configuration
 print(f"\n🚀 Deploying EKS Platform with:")
 print(f"   - Compute Mode: {compute_mode}")
 print(f"   - DevOps Agent: {'enabled' if deploy_devops_agent else 'disabled'}")
+if deploy_devops_agent:
+    if devops_agent_role_arn:
+        print(f"   - Agent Role: {devops_agent_role_arn} (existing)")
+    else:
+        print(f"   - Agent Space: will be created via CfnAgentSpace")
 print()
 
 # Add custom tags to all resources
@@ -97,18 +113,16 @@ if compute_mode == "fargate":
 else:  # auto-mode
     config = EnvironmentConfig.development(account, region)
 
+# Override Grafana if disabled (e.g. for regions without Managed Grafana)
+if not grafana_enabled:
+    config.monitoring.grafana_enabled = False
+
 # Configure DevOps Agent based on deployment flag
 if deploy_devops_agent:
-    if not devops_agent_role_arn:
-        print("⚠️  Warning: deploy_devops_agent=true but no devops_agent_role_arn provided")
-        print("   Please provide the DevOps Agent role ARN:")
-        print("   cdk deploy --all -c deploy_devops_agent=true -c devops_agent_role_arn=<ROLE_ARN>")
-        sys.exit(1)
-    
     config.devops_agent = DevOpsAgentConfig(
         enabled=True,
         agent_space_name=f"{config.eks.cluster_name}-agent-space",
-        role_arn=devops_agent_role_arn,
+        role_arn=devops_agent_role_arn,  # None means create Agent Space inline
         create_eks_access=True,
         grant_cluster_admin=True
     )
@@ -197,6 +211,7 @@ otel_app = OtelAppConstruct(
     repository_uri=f"{account}.dkr.ecr.{region}.amazonaws.com/otel-sample-app",
     region=region,
     prometheus_workspace_id=observability_stack.prometheus_workspace_id,
+    adot_role_arn=eks_cluster_stack.adot_role.role_arn,
     opentelemetry_namespace=eks_cluster_stack.opentelemetry_namespace,
     compute_config=config.eks.compute
 )

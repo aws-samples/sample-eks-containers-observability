@@ -1,6 +1,7 @@
 """
 AWS DevOps Agent EKS Access Configuration
-Grants existing AWS DevOps Agent service-linked role access to EKS cluster
+Grants existing AWS DevOps Agent service-linked role access to EKS cluster.
+Optionally creates the Agent Space via CfnAgentSpace when no role ARN is provided.
 """
 
 from aws_cdk import (
@@ -12,11 +13,14 @@ from aws_cdk import (
 from constructs import Construct
 from typing import Optional
 
+from .agent_space_construct import AgentSpaceConstruct
+
 
 class DevOpsAgentStack(Stack):
     """
-    Stack to grant AWS DevOps Agent access to EKS cluster
-    Works with existing Agent Space service-linked roles
+    Stack to grant AWS DevOps Agent access to EKS cluster.
+    If devops_agent_role_arn is provided, it imports the existing role.
+    If not, it creates an Agent Space via CfnAgentSpace and derives the role ARN.
     """
 
     def __init__(
@@ -25,7 +29,7 @@ class DevOpsAgentStack(Stack):
         construct_id: str,
         cluster_name: str,
         log_group_name: str,
-        devops_agent_role_arn: str,
+        devops_agent_role_arn: Optional[str] = None,
         agent_space_name: Optional[str] = None,
         **kwargs
     ) -> None:
@@ -34,16 +38,31 @@ class DevOpsAgentStack(Stack):
         self.cluster_name = cluster_name
         self.log_group_name = log_group_name
         self.agent_space_name = agent_space_name or f"{cluster_name}-agent-space"
-        self.devops_agent_role_arn = devops_agent_role_arn
+
+        if devops_agent_role_arn:
+            # Use existing Agent Space role
+            self.devops_agent_role_arn = devops_agent_role_arn
+        else:
+            # Create the Agent Space and derive the service-linked role ARN
+            self.agent_space = AgentSpaceConstruct(
+                self,
+                "AgentSpace",
+                space_name=self.agent_space_name,
+                description=f"DevOps Agent for EKS cluster {cluster_name}",
+            )
+            self.devops_agent_role_arn = (
+                f"arn:aws:iam::{self.account}:role/service-role/"
+                f"{self.agent_space_name}-DevOpsAgentRole"
+            )
 
         # Extract role name from ARN
-        self.role_name = devops_agent_role_arn.split('/')[-1]
+        self.role_name = self.devops_agent_role_arn.split('/')[-1]
 
-        # Import the existing DevOps Agent role
+        # Import the DevOps Agent role (created automatically by the service)
         self.devops_agent_role = iam.Role.from_role_arn(
             self,
             "DevOpsAgentRole",
-            role_arn=devops_agent_role_arn
+            role_arn=self.devops_agent_role_arn
         )
 
         # Create managed policies for the DevOps Agent role

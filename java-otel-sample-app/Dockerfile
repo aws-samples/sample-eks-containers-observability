@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/openjdk:26-slim
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
