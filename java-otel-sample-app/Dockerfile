@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jre-alpine
+FROM public.ecr.aws/docker/library/eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
