@@ -176,6 +176,14 @@ processors:
           - container_memory_limit
           - service_number_of_running_pods
           - otel_sample_app_.*
+          - http_requests_total
+          - http_request_duration_seconds
+          - active_users
+          - go_cpu_usage_percent
+          - jvm_.*
+          - process_.*
+          - runtime_.*
+          - otelhttp_.*
 
 exporters:
   awsxray:
@@ -389,6 +397,19 @@ service:
                     },
                     "spec": {
                         **self._get_pod_spec(),
+                        "affinity": {
+                            "podAntiAffinity": {
+                                "preferredDuringSchedulingIgnoredDuringExecution": [{
+                                    "weight": 100,
+                                    "podAffinityTerm": {
+                                        "labelSelector": {
+                                            "matchLabels": {"app": "otel-sample-app"}
+                                        },
+                                        "topologyKey": "kubernetes.io/hostname"
+                                    }
+                                }]
+                            }
+                        },
                         "containers": [{
                             "name": "otel-sample-app",
                             "image": f"{repository_uri}:latest",

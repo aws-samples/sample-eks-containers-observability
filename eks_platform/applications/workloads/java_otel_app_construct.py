@@ -53,6 +53,19 @@ class JavaOtelAppConstruct(Construct):
                     },
                     "spec": {
                         **self._get_pod_spec(),
+                        "affinity": {
+                            "podAntiAffinity": {
+                                "preferredDuringSchedulingIgnoredDuringExecution": [{
+                                    "weight": 100,
+                                    "podAffinityTerm": {
+                                        "labelSelector": {
+                                            "matchLabels": {"app": "java-otel-sample-app"}
+                                        },
+                                        "topologyKey": "kubernetes.io/hostname"
+                                    }
+                                }]
+                            }
+                        },
                         "containers": [{
                             "name": "java-otel-sample-app",
                             "image": f"{repository_uri}:latest",
