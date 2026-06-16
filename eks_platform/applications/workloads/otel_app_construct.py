@@ -11,25 +11,29 @@ class OtelAppConstruct(Construct):
     Construct for the OpenTelemetry sample application
     """
     def __init__(
-        self, 
-        scope: Construct, 
+        self,
+        scope: Construct,
         construct_id: str,
         cluster: eks.ICluster,
         repository_uri: str,
         region: str,
         prometheus_workspace_id: str,
+        adot_role_arn: str = None,
         opentelemetry_namespace=None,
         compute_config=None,
         **kwargs
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
         self.compute_config = compute_config
-        
+
         # Use pre-created opentelemetry namespace
         namespace = None  # Will be created in app.py
-        
-        # Create service account for the ADOT collector
-        adot_role_arn = f"arn:aws:iam::{scope.account}:role/ADOT-PrometheusRemoteWrite-{scope.stack_name}"
+
+        # Use the provided ADOT role ARN (avoids truncation mismatch with IAM role name)
+        if adot_role_arn is None:
+            import re
+            sanitized = re.sub(r'[^a-zA-Z0-9_+=,.@-]', '-', scope.stack_name)[:30]
+            adot_role_arn = f"arn:aws:iam::{scope.account}:role/ADOT-PrometheusRemoteWrite-{sanitized}"
         service_account = cluster.add_manifest("OtelCollectorSA", {
             "apiVersion": "v1",
             "kind": "ServiceAccount",

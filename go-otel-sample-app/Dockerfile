@@ -1,16 +1,13 @@
-FROM public.ecr.aws/docker/library/golang:tip-alpine3.22 AS builder
-
-ENV GOPROXY=direct
-RUN apk add --no-cache git
+FROM --platform=linux/arm64 public.ecr.aws/docker/library/golang:1.23-bookworm AS builder
 
 WORKDIR /app
 COPY go.mod go.sum ./
-RUN go mod download
+COPY vendor ./vendor
 
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=vendor -o main .
 
-FROM public.ecr.aws/docker/library/alpine:latest
+FROM --platform=linux/amd64 public.ecr.aws/docker/library/alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 

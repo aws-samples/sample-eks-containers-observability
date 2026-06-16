@@ -101,3 +101,9 @@ go-otel-sample-app/main
 # Generated CDK files
 cdk.context.json
 outputs.json
+
+# Playwright MCP test tooling
+.playwright-mcp/
+
+# Go vendor directory (rebuilt via: cd go-otel-sample-app && go mod vendor)
+go-otel-sample-app/vendor/
