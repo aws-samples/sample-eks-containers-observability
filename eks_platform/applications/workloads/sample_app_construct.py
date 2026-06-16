@@ -43,12 +43,25 @@ class SampleAppConstruct(Construct):
                         "labels": self._get_pod_labels(),
                         "annotations": {
                             "prometheus.io/scrape": "true",
-                            "prometheus.io/port": "8080",
+                            "prometheus.io/port": "8000",
                             "prometheus.io/path": "/metrics"
                         }
                     },
                     "spec": {
                         **self._get_pod_spec(),
+                        "affinity": {
+                            "podAntiAffinity": {
+                                "preferredDuringSchedulingIgnoredDuringExecution": [{
+                                    "weight": 100,
+                                    "podAffinityTerm": {
+                                        "labelSelector": {
+                                            "matchLabels": {"app": "sample-metrics-app"}
+                                        },
+                                        "topologyKey": "kubernetes.io/hostname"
+                                    }
+                                }]
+                            }
+                        },
                         "containers": [{
                             "name": "sample-metrics-app",
                             "image": f"{repository_uri}:latest",
@@ -65,6 +78,22 @@ class SampleAppConstruct(Construct):
                                     "memory": "256Mi",
                                     "cpu": "200m"
                                 }
+                            },
+                            "livenessProbe": {
+                                "httpGet": {
+                                    "path": "/metrics",
+                                    "port": 8000
+                                },
+                                "initialDelaySeconds": 10,
+                                "periodSeconds": 15
+                            },
+                            "readinessProbe": {
+                                "httpGet": {
+                                    "path": "/metrics",
+                                    "port": 8000
+                                },
+                                "initialDelaySeconds": 5,
+                                "periodSeconds": 10
                             }
                         }]
                     }
