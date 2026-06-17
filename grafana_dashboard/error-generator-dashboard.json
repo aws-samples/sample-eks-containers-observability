@@ -1,0 +1,266 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Total Errors Generated",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum(error_generator_errors_total)",
+          "legendFormat": "Total Errors"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 50 },
+              { "color": "red", "value": 200 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Error Rate (per min)",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum(rate(error_generator_errors_total[1m])) * 60",
+          "legendFormat": "Errors/min"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 10 },
+              { "color": "red", "value": 30 }
+            ]
+          },
+          "unit": "short"
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Critical Errors",
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum(error_generator_errors_total{severity=\"critical\"})",
+          "legendFormat": "Critical"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "red", "mode": "fixed" },
+          "unit": "short"
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "HTTP Requests Total",
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum(error_generator_requests_total)",
+          "legendFormat": "Requests"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "blue", "mode": "fixed" }
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Error Rate by Type",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "rate(error_generator_errors_total[1m]) * 60",
+          "legendFormat": "{{error_type}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "pointSize": 5,
+            "showPoints": "auto"
+          },
+          "unit": "short"
+        }
+      },
+      "options": {
+        "legend": { "displayMode": "table", "placement": "right" }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Error Rate by Severity",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum by (severity) (rate(error_generator_errors_total[1m]) * 60)",
+          "legendFormat": "{{severity}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "critical" }, "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "high" }, "properties": [{ "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "medium" }, "properties": [{ "id": "color", "value": { "fixedColor": "yellow", "mode": "fixed" } }] }
+        ]
+      },
+      "options": {
+        "legend": { "displayMode": "table", "placement": "right" }
+      }
+    },
+    {
+      "type": "piechart",
+      "title": "Error Distribution by Type",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 12 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum by (error_type) (error_generator_errors_total)",
+          "legendFormat": "{{error_type}}"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "table", "placement": "right" },
+        "pieType": "donut"
+      }
+    },
+    {
+      "type": "piechart",
+      "title": "Error Distribution by Severity",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 12 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum by (severity) (error_generator_errors_total)",
+          "legendFormat": "{{severity}}"
+        }
+      ],
+      "options": {
+        "legend": { "displayMode": "table", "placement": "right" },
+        "pieType": "donut"
+      },
+      "fieldConfig": {
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "critical" }, "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "high" }, "properties": [{ "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "medium" }, "properties": [{ "id": "color", "value": { "fixedColor": "yellow", "mode": "fixed" } }] }
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "title": "Error Counts by Type & Severity",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 12 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sort_desc(error_generator_errors_total)",
+          "format": "table",
+          "instant": true
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": { "Time": true, "__name__": true, "instance": true, "job": true, "kubernetes_namespace": true, "kubernetes_pod_name": true },
+            "renameByName": { "error_type": "Error Type", "severity": "Severity", "Value": "Count" }
+          }
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Cumulative Errors Over Time",
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 20 },
+      "datasource": "${datasource}",
+      "targets": [
+        {
+          "expr": "sum(error_generator_errors_total)",
+          "legendFormat": "Total Errors"
+        },
+        {
+          "expr": "sum(error_generator_errors_total{severity=\"critical\"})",
+          "legendFormat": "Critical"
+        },
+        {
+          "expr": "sum(error_generator_errors_total{severity=\"high\"})",
+          "legendFormat": "High"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 5
+          }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "Critical" }, "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "High" }, "properties": [{ "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } }] },
+          { "matcher": { "id": "byName", "options": "Total Errors" }, "properties": [{ "id": "color", "value": { "fixedColor": "purple", "mode": "fixed" } }] }
+        ]
+      }
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["error-generator", "observability", "prometheus"],
+  "templating": {
+    "list": [
+      {
+        "current": { "selected": false, "text": "AMP-Prometheus", "value": "AMP-Prometheus" },
+        "hide": 0,
+        "includeAll": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": { "from": "now-30m", "to": "now" },
+  "title": "Error Generator App - Observability",
+  "uid": "error-generator-app",
+  "version": 1
+}
