@@ -259,6 +259,7 @@ The DevOps Agent will have full access to:
    kubectl port-forward svc/otel-sample-app 8080:8000 -n default
    kubectl port-forward svc/go-otel-sample-app 8090:8080 -n default
    kubectl port-forward svc/java-otel-sample-app 8081:8080 -n default
+   kubectl port-forward svc/error-generator-app 8082:8080 -n default
    ```
 
 ### Manual Grafana Configuration
@@ -379,6 +380,22 @@ The solution includes pre-built Grafana dashboards in the `grafana_dashboard/` f
 - Error rate tracking and alerting
 - Request volume trends
 
+### **Error Generator App Dashboard**
+**File**: `error-generator-dashboard.json`
+
+**Features**:
+- Real-time error generation rate and cumulative counts
+- Error breakdown by type (DatabaseConnectionError, TimeoutError, OutOfMemoryError, etc.)
+- Severity distribution (critical, high, medium) with color-coded visualizations
+- Donut charts for error type and severity distribution
+- Sortable table of all error types with counts
+- Cumulative error trends over time
+- Metrics flow through OTel Collector → AMP via `prometheusremotewrite`
+
+**Key Metrics**:
+- `error_generator_errors_total` — errors by `error_type` and `severity`
+- `error_generator_requests_total` — HTTP requests by `endpoint` and `status`
+
 ### **Key Directories Explained**
 
 - **`grafana_dashboard/`**: Ready-to-import Grafana dashboards with comprehensive monitoring views
@@ -386,6 +403,7 @@ The solution includes pre-built Grafana dashboards in the `grafana_dashboard/` f
 - **`go-otel-sample-app/`**: Go application with OpenTelemetry instrumentation and system monitoring
 - **`java-otel-sample-app/`**: Java Spring Boot microservice with OpenTelemetry instrumentation, Micrometer metrics, and OTEL-compliant logging
 - **`sample-metrics-app/`**: Prometheus-instrumented application for metrics demonstration
+- **`error-generator-app/`**: Error simulation app with Prometheus metrics, generates random errors (DB, timeout, OOM, auth, etc.) for observability testing via OTel pipeline
 - **`eks_fargate_platform/`**: Modular CDK infrastructure organized by layers:
   - **`infrastructure/`**: Core infrastructure components (VPC, EKS, ECR)
   - **`platform/`**: Platform services (monitoring, utilities)
