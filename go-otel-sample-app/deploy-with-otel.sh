@@ -13,5 +13,5 @@ aws ecr get-login-password --region $REGION | docker login --username AWS --pass
 # Build and push
 docker build -t go-otel-sample-app .
 docker tag go-otel-sample-app:latest $ECR_URI:latest
-docker buildx build --platform linux/amd64 --push -t $ECR_URI:latest .
+docker buildx build --platform linux/amd64,linux/arm64 --push -t $ECR_URI:latest .
 echo "Pushing image to ECR..."
