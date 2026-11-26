@@ -1,13 +1,14 @@
-FROM --platform=linux/arm64 public.ecr.aws/docker/library/golang:1.23-bookworm AS builder
+FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/golang:1.23-bookworm AS builder
+ARG TARGETOS TARGETARCH
 
 WORKDIR /app
 COPY go.mod go.sum ./
 COPY vendor ./vendor
 
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=vendor -o main .
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -mod=vendor -o main .
 
-FROM --platform=linux/amd64 public.ecr.aws/docker/library/alpine:latest
+FROM public.ecr.aws/docker/library/alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 
