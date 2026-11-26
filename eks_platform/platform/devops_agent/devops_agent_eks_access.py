@@ -8,7 +8,8 @@ from aws_cdk import (
     aws_iam as iam,
     custom_resources as cr,
     CustomResource,
-    Duration
+    Duration,
+    Stack
 )
 from constructs import Construct
 
@@ -35,6 +36,21 @@ class DevOpsAgentEksAccess(Construct):
         # Create access entry for DevOps Agent
         self._create_access_entry()
 
+    def _eks_access_resources(self) -> list:
+        """IAM resources for access-entry APIs.
+
+        Associate/DisassociateAccessPolicy and Describe/DeleteAccessEntry are
+        authorized against the access-entry ARN
+        (arn:aws:eks:<region>:<account>:access-entry/<cluster>/...), which is
+        NOT matched by "<cluster_arn>/*".
+        """
+        stack = Stack.of(self)
+        return [
+            self.cluster.cluster_arn,
+            f"{self.cluster.cluster_arn}/*",
+            f"arn:{stack.partition}:eks:{stack.region}:{stack.account}:access-entry/{self.cluster.cluster_name}/*",
+        ]
+
     def _create_access_entry(self) -> None:
         """Create EKS access entry for DevOps Agent role"""
         
@@ -57,10 +73,7 @@ class DevOpsAgentEksAccess(Construct):
                         "eks:DisassociateAccessPolicy",
                         "eks:ListAssociatedAccessPolicies"
                     ],
-                    resources=[
-                        self.cluster.cluster_arn,
-                        f"{self.cluster.cluster_arn}/*"
-                    ]
+                    resources=self._eks_access_resources()
                 )
             ]),
             timeout=Duration.minutes(5)
@@ -79,10 +92,7 @@ class DevOpsAgentEksAccess(Construct):
                         "eks:DisassociateAccessPolicy",
                         "eks:ListAssociatedAccessPolicies"
                     ],
-                    resources=[
-                        self.cluster.cluster_arn,
-                        f"{self.cluster.cluster_arn}/*"
-                    ]
+                    resources=self._eks_access_resources()
                 )
             ]),
             timeout=Duration.minutes(5)
